@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("testing push");
         System.out.println("I am better then you");
         System.out.println("Testing?");
-        //comment
-        //more comment
-        //what could go wrong
-        //nothin' that's what
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
     }
         //I know what I'm doing, trust me.
 }
