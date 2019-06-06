@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         System.out.println("Try overwriting this and resolving the conflict.");
+        System.out.println("Here's some garbage, it will create a conflict");
     }
 
 }
