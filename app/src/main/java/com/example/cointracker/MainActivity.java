@@ -44,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
     public void badFunction(){
         System.out.println("testing push");
         System.out.println("I am better then you");
-        System.out.println("");
-        //NO COMMENTS Allowed
+        System.out.println("Testing?");
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
     }
+        //I know what I'm doing, trust me.
+        //More conflicts more problems
 }
+
