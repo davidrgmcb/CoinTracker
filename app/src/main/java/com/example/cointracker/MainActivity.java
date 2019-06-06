@@ -41,4 +41,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Here's some garbage, it will create a conflict");
     }
 
+    public void badFunction(){
+        System.out.println("testing push");
+    }
 }
