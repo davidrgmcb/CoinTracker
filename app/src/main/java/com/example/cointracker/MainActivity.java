@@ -51,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
         //I know what I'm doing, trust me.
     }
         //I know what I'm doing, trust me.
-        //Conflict
+        //More conflicts more problems
 }
 
