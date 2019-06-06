@@ -37,27 +37,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        System.out.println("Try overwriting this and resolving the conflict.");
-        System.out.println("Here's some garbage, it will create a conflict");
     }
-
-    public void badFunction(){
-        System.out.println("testing push");
-        System.out.println("I am better then you");
-        System.out.println("Testing?");
-        //I know what I'm doing, trust me.
-        //I know what I'm doing, trust me.
-        //I know what I'm doing, trust me.
-        //I know what I'm doing, trust me.
-    }
-        //I know what I'm doing, trust me.
-        //More conflicts more problems
-    //NO Comments allowed
-    //comment
-    //comment by clayton
-    //Change for Clayton
-    //change for brian
-    //Here's a conflict
-    //There's a conflict
 }
 
