@@ -39,4 +39,7 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    public void badFunction(){
+        System.out.println("testing push");
+    }
 }
