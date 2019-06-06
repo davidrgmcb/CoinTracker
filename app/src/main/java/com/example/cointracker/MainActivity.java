@@ -55,5 +55,7 @@ public class MainActivity extends AppCompatActivity {
     //NO Comments allowed
     //comment
     //Change for Clayton
+    //Here's a conflict
+    //There's a conflict
 }
 
