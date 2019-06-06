@@ -44,5 +44,6 @@ public class MainActivity extends AppCompatActivity {
     public void badFunction(){
         System.out.println("testing push");
         System.out.println("I am better then you");
+        System.out.println("");
     }
 }
