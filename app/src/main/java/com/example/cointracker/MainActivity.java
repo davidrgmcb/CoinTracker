@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        System.out.println("Try overwriting this and resolving the conflict.");
-        System.out.println("Here's some garbage, it will create a conflict");
     }
 
     public void badFunction(){
@@ -60,5 +58,6 @@ public class MainActivity extends AppCompatActivity {
     //change for Alberto
     //Here's a conflict
     //There's a conflict
+
 }
 
