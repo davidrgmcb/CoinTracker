@@ -43,7 +43,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void badFunction(){
         System.out.println("testing push");
-        System.out.println("A conflict appears");
+        System.out.println("I am better then you");
+        System.out.println("Testing?");
+        //comment
+        //more comment
+        //what could go wrong
+        //nothin' that's what
     }
         //I know what I'm doing, trust me.
 }
