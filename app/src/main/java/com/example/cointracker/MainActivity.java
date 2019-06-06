@@ -52,5 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
         //I know what I'm doing, trust me.
         //More conflicts more problems
+    //NO Comments allowed
 }
 
