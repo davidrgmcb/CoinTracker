@@ -10,4 +10,5 @@ public class MainTest {
     public void assertEquality() {
         assertEquals(4, 2+2);
     }
+
 }

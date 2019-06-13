@@ -10,6 +10,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
 
+    //This is a test to see if portfolio button works.
+    public int portfolioButtonWorks = 0;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
 
     }
 
