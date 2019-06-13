@@ -38,5 +38,26 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
+
+    public void badFunction(){
+        System.out.println("testing push");
+        System.out.println("I am better then you");
+        System.out.println("Testing?");
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+        //I know what I'm doing, trust me.
+    }
+        //I know what I'm doing, trust me.
+        //More conflicts more problems
+    //NO Comments allowed
+    //comment
+    //comment by clayton
+    //Change for Clayton
+    //change for brian
+    //change for Alberto
+    //Here's a conflict
+    //There's a conflict
+
 }
 
