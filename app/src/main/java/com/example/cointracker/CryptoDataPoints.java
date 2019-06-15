@@ -9,15 +9,14 @@ public class CryptoDataPoints {
 
     //data points from CoinGeckoAPI: https://www.coingecko.com/api/documentations/v3#/
 
-    private String
+    String
             id,
             symbol,
             name,
             image,
             ath_date,
             last_updated;
-
-    private int
+    double
             current_price,
             market_cap,
             market_cap_rank,

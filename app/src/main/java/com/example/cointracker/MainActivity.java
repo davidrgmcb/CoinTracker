@@ -46,22 +46,37 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        getCrypto();
+    }
 
-
-        CryptoDataPoints cryptoDataPoints = new CryptoDataPoints();
-        String cryptoResponse = null;
-        try {
-            cryptoResponse = cryptoDataPoints.getCryptoData("USD" );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(cryptoResponse);
-
-        cryptoDataPoints = new Gson().fromJson(cryptoResponse, CryptoDataPoints.class);
-        System.out.println(cryptoDataPoints);
+    void getCrypto(){
+        CryptoTask task = new CryptoTask("USD");
+        task.start();
 
     }
 
+    private class CryptoTask extends Thread {
+        String _currency;
+        CryptoTask(String currency) {
+            _currency = currency;
+        }
+
+        @Override
+        public void run() {
+            CryptoDataPoints cryptoDataPoints = new CryptoDataPoints();
+            String cryptoResponse = null;
+            try {
+                cryptoResponse = cryptoDataPoints.getCryptoData("USD" );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(cryptoResponse);
+
+            CryptoDataPoints[] cryptoDataPoints2 = new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class);
+            System.out.println(cryptoDataPoints2[0].id + cryptoDataPoints2[0].current_price
+            + cryptoDataPoints2[1].id + cryptoDataPoints2[1].current_price);
+        }
+    }
 
 
 }
