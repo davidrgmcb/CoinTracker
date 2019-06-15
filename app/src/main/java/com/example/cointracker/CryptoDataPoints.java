@@ -109,6 +109,8 @@ public class CryptoDataPoints {
 
         try (Response response = client.newCall(request).execute()) {
             return response.body().string();
+        }catch (IOException e){
+            return "error";
         }
     }
 

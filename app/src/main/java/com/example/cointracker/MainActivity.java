@@ -48,16 +48,21 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
+        CryptoDataPoints cryptoDataPoints = new CryptoDataPoints();
+        String cryptoResponse = null;
+        try {
+            cryptoResponse = cryptoDataPoints.getCryptoData("USD" );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(cryptoResponse);
+
+        cryptoDataPoints = new Gson().fromJson(cryptoResponse, CryptoDataPoints.class);
+        System.out.println(cryptoDataPoints);
+
     }
 
-    CryptoDataPoints cryptoDataPoints = new CryptoDataPoints();
-    //String urlForecast = "https://api.openweathermap.org/data/2.5/forecast?q=";
-    String cryptoResponse = cryptoDataPoints.getCryptoData("USD" );
-        //System.out.println("weather forecast url: " + urlForecast + city + format + apiKey);
 
-    cryptoDataPoints = new Gson().fromJson(cryptoResponse, CryptoDataPoints.class);
-    //System.out.println("Forecast unformatted:\n" + forecastResponse);
-        //forecast.displayForecast();
 
 }
 
