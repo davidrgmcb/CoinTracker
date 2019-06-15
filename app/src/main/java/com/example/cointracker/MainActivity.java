@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.google.gson.Gson;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    public MainActivity() throws IOException {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    CryptoDataPoints cryptoDataPoints = new CryptoDataPoints();
+    //String urlForecast = "https://api.openweathermap.org/data/2.5/forecast?q=";
+    String cryptoResponse = cryptoDataPoints.getCryptoData("USD" );
+        //System.out.println("weather forecast url: " + urlForecast + city + format + apiKey);
+
+    cryptoDataPoints = new Gson().fromJson(cryptoResponse, CryptoDataPoints.class);
+    //System.out.println("Forecast unformatted:\n" + forecastResponse);
+        //forecast.displayForecast();
 
 }
 
