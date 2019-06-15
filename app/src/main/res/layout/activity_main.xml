@@ -30,4 +30,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="DisplayCrypto"
+        android:text="Display Crypto"
+        tools:layout_editor_absoluteX="128dp"
+        tools:layout_editor_absoluteY="117dp" />
+
 </android.support.constraint.ConstraintLayout>
