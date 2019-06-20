@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     void getCrypto(){
         CryptoTask task = new CryptoTask("USD");
         task.start();
-
     }
 
     private class CryptoTask extends Thread {
