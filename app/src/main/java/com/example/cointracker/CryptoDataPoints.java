@@ -6,6 +6,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class CryptoDataPoints {
+    static CryptoDataPoints[] listCDP;
+
 
     //data points from CoinGeckoAPI: https://www.coingecko.com/api/documentations/v3#/
 

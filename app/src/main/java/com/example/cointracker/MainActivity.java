@@ -15,7 +15,6 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
-    CryptoDataPoints[] listCDP;
 
     //This is a test to see if portfolio button works.
     public int portfolioButtonWorks = 0;
@@ -53,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
         getCrypto();
     }
 
+    //////////////////////try to modularize this, from getCrypto dow to saveListCDP/////////////
+    CryptoDataPoints[] listCDP;
+
     void getCrypto(){
         CryptoTask task = new CryptoTask("USD");
         task.start();
@@ -73,11 +75,8 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(cryptoResponse);
 
             final CryptoDataPoints[] listCDP = new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class);
-            System.out.println(listCDP[0].id + listCDP[0].current_price
-                + listCDP[1].id + listCDP[1].current_price);
 
             runOnUiThread(new Runnable() {
                 @Override
