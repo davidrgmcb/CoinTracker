@@ -15,9 +15,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
-
-    //This is a test to see if portfolio button works.
-    public int portfolioButtonWorks = 0;
+    static CryptoDataPoints[] listCDP;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -39,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public MainActivity() throws IOException {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //////////////////////try to modularize this, from getCrypto dow to saveListCDP/////////////
-    CryptoDataPoints[] listCDP;
+
 
     void getCrypto(){
         CryptoTask task = new CryptoTask("USD");
