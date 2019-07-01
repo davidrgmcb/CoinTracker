@@ -14,6 +14,7 @@
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:onClick="goToAllCryptos"
+        android:title="@string/title_activity_all_cryptos" />
 
 </menu>

@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="testData">dummy</string>
     <string name="title_activity_all_cryptos">AllCryptos</string>
     <string name="title_activity_portfolio">portfolio</string>
     <string name="title_activity_crypto_detail">cryptoDetail</string>

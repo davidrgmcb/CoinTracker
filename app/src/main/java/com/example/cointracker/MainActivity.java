@@ -1,5 +1,8 @@
 package com.example.cointracker;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    mTextMessage.setText(R.string.title_activity_all_cryptos);
                     return true;
             }
             return false;
@@ -52,6 +55,26 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         getCrypto();
     }
+
+    /*@Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String newTestData = "Unmistakeably dummy data";
+        editor.putString(getString(R.string.testData), newTestData);
+        editor.commit();
+        System.out.println(getString(R.string.testData));
+    }*/
+
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+        String checkTest = null;
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        String storedData = sharedPref.getString(getString(R.string.testData), checkTest);
+        System.out.println(checkTest);
+    }*/
 
     void getCrypto(){
         CryptoTask task = new CryptoTask("USD");
@@ -95,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
     public void DisplayCrypto(View view){
         Toast.makeText(this, listCDP[0].id + listCDP[0].current_price
                 + listCDP[1].id + listCDP[1].current_price, Toast.LENGTH_LONG).show();
+    }
+
+    public void goToAllCryptos (MenuItem menuitem) {
+        Intent changeActvity = new Intent(MainActivity.this, AllCryptos.class);
+        startActivity(changeActvity);
     }
 
 
