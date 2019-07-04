@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Coin Tracker</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_portfolio">Portfolio</string>
+    <string name="title_all_crypto">All Currencies</string>
     <string name="title_activity_all_cryptos">AllCryptos</string>
     <string name="title_activity_portfolio">portfolio</string>
     <string name="title_activity_crypto_detail">cryptoDetail</string>
