@@ -90,19 +90,19 @@ public class CryptoDataPoints {
 
 
     //coinGecko api is public, no key required
-    String baseUrl = "https://api.coingecko.com/api/v3/";
+    static String baseUrl = "https://api.coingecko.com/api/v3/";
 
     //endpoints
-    String markets = "coins/markets?vs_currency="; //for getting list of all crypto data
+    static String markets = "coins/markets?vs_currency="; //for getting list of all crypto data
     //params
     //String currency; //assign one of Currencies enumerated values, required param
     String order = "&order="; //assign one of Sorting enumerated values, optional param
     String per_page = "&per_page=250"; //up to 250 coins can be returned, optional param
 
     //using square OkHttp library for simple callouts
-    OkHttpClient client = new OkHttpClient();
+    static OkHttpClient client = new OkHttpClient();
 
-    String getCryptoData(String _currency) throws IOException {
+    static String getCryptoData(String _currency) throws IOException {
         String url = baseUrl + markets + _currency;
         Request request = new Request.Builder()
                 .url(url)
