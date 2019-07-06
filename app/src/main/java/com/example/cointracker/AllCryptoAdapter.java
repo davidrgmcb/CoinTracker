@@ -79,10 +79,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
 
     @Override
     public int getItemCount() {
-        int i = 0;
-        for (i = 0; cryptoList[i] != null; i++);
-
-        return i; //cryptoList.size();
+        return cryptoList.length;
     }
 }
 

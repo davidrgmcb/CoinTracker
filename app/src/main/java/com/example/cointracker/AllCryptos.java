@@ -60,7 +60,7 @@ public class AllCryptos extends AppCompatActivity {
         //System.out.println(cryptoList);
         //Toast.makeText(this, "******** = " + cryptoList.getListCDP()[0].name, Toast.LENGTH_LONG).show(); 
         // Get a handle to the RecyclerView.
-        mRecyclerView = findViewById(R.id.recyclerview);
+        mRecyclerView = findViewById(R.id.recyclerview10);
         // Create an adapter and supply the data to be displayed.
         mAdapter = new AllCryptoAdapter(this, cryptoList.getListCDP());
         // Connect the adapter with the RecyclerView.
