@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -20,6 +21,10 @@ import java.io.IOException;
 
 public class AllCryptos extends AppCompatActivity {
     private TextView mTextMessage;
+    private ListOfCrypto cryptoList = null;
+    private RecyclerView mRecyclerView;
+    private AllCryptoAdapter mAdapter;
+
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -49,9 +54,24 @@ public class AllCryptos extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        getCrypto();
+        //getCrypto();
+        cryptoList = cryptoList.getInstance();
+
+        //System.out.println(cryptoList);
+        //Toast.makeText(this, "******** = " + cryptoList.getListCDP()[0].name, Toast.LENGTH_LONG).show(); 
+        // Get a handle to the RecyclerView.
+        mRecyclerView = findViewById(R.id.recyclerview);
+        // Create an adapter and supply the data to be displayed.
+        mAdapter = new AllCryptoAdapter(this, cryptoList.getListCDP());
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(mAdapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
+
+/*
     //////////////////////try to modularize this, from getCrypto dow to saveListCDP/////////////
     CryptoDataPoints[] listCDP;
 
@@ -90,7 +110,7 @@ public class AllCryptos extends AppCompatActivity {
     void saveListCDP(CryptoDataPoints[] listCDP){
         this.listCDP = listCDP;
     }
-
+*/
 
     /////////////////below taken from sample RecyclerViewApp///////////////////////////////
 /******************************************************************************

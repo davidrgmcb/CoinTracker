@@ -16,6 +16,79 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.LinkedList;
+
+public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.CryptoViewHolder> {
+
+    class CryptoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public final TextView cryptoItemView;
+        final AllCryptoAdapter mAdapter;
+
+        public CryptoViewHolder(View itemView, AllCryptoAdapter adapter){
+            super(itemView);
+            cryptoItemView = itemView.findViewById(R.id.cryptoItem);
+            this.mAdapter = adapter;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // Get the position of the item that was clicked.
+            int mPosition = getLayoutPosition();
+            // Use that to access the affected item in cryptoList.
+            String element = cryptoList[mPosition].name; //get(mPosition);
+            // Change the word in the mWordList.
+            cryptoList[mPosition].name = "Clicked + " + element; //set(mPosition, "Clicked! " + element);
+            // Notify the adapter, that the data has changed so it can
+            // update the RecyclerView to display the data.
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    //private final LinkedList<String> mWordList;
+    private CryptoDataPoints[] cryptoList;
+    private LayoutInflater mInflator;
+
+    public AllCryptoAdapter(Context context, CryptoDataPoints[] cryptoList){
+        mInflator = LayoutInflater.from(context);
+        this.cryptoList = cryptoList;
+    }
+
+    @NonNull
+    @Override
+    public AllCryptoAdapter.CryptoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View mItemView = mInflator.inflate(R.layout.cryptolistitem,parent,false);
+        return new CryptoViewHolder(mItemView, this);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AllCryptoAdapter.CryptoViewHolder holder, int position) {
+        String mCurrent = cryptoList[position].name; //get(position);
+        holder.cryptoItemView.setText(mCurrent);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        int i = 0;
+        for (i = 0; cryptoList[i] != null; i++);
+
+        return i; //cryptoList.size();
+    }
+}
+
+
+
+
 ///////////////////////copied from RecyclerView sampler app///////////////////////
 /***************************************************************************
 

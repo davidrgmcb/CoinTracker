@@ -16,7 +16,7 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyCoinRecyclerViewAdapter extends RecyclerView.Adapter<MyCoinRecyclerViewAdapter.ViewHolder> {
+public class    MyCoinRecyclerViewAdapter extends RecyclerView.Adapter<MyCoinRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
