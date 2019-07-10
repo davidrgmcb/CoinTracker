@@ -49,8 +49,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="104dp"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/cryptoName"
         app:layout_constraintEnd_toEndOf="parent"

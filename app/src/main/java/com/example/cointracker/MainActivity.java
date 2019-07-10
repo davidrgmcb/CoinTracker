@@ -47,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void display(View view) {
         Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_LONG).show();
-        Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
+        //Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
+        //MainActivity.this.startActivity(myIntent);
+
+        Intent myIntent = new Intent(MainActivity.this, cryptoDetail.class);
         MainActivity.this.startActivity(myIntent);
     }
 }

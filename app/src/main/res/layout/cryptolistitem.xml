@@ -23,8 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-46dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="-2dp"
         android:layout_toEndOf="@+id/imageView"
         android:text="Rank"
         android:textColor="@android:color/black"
@@ -39,7 +39,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/imageView"
-        android:text="CryptoName"
+        android:text="Crypto Name"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -52,7 +52,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="1dp"
         android:layout_toEndOf="@+id/imageView"
-        android:text="CryptoPrice"
+        android:text="Crypto Price"
         android:textSize="15sp" />
 
     <TextView
@@ -63,7 +63,17 @@
         android:layout_marginStart="110dp"
         android:layout_marginTop="-1dp"
         android:layout_toEndOf="@+id/cryptoPrice"
-        android:text="PercentageChange"
+        android:text="Percentage Change"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/allTimeHigh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cryptoName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-1dp"
+        android:text="All Time High"
         android:textSize="15sp" />
 
 </RelativeLayout>

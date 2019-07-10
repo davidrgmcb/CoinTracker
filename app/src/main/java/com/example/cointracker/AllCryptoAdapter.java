@@ -19,6 +19,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
         TextView cryptoPrice;
         TextView percentageChange;
         TextView rank;
+        TextView ath;
 
 
         public CryptoViewHolder(View itemView, AllCryptoAdapter adapter){
@@ -26,6 +27,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
             cryptoName = itemView.findViewById(R.id.cryptoName);
             cryptoPrice = itemView.findViewById(R.id.cryptoPrice);
             percentageChange = itemView.findViewById(R.id.percentageChange);
+            ath = itemView.findViewById(R.id.allTimeHigh);
             rank = itemView.findViewById(R.id.rank);
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);
@@ -69,6 +71,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
         holder.cryptoPrice.setText("$"+currentItem.current_price);
         holder.percentageChange.setText(currentItem.price_change_percentage_24h + "%");
         holder.rank.setText("#"+currentItem.market_cap_rank);
+        holder.ath.setText("$"+ currentItem.ath);
 
     }
 
