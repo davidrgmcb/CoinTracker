@@ -51,7 +51,9 @@ public class cryptoDetail extends AppCompatActivity {
 
         cryptoList = cryptoList.getInstance();
         cryptoDetailArray = cryptoList.getListCDP();
-        arrayPosition = 0; //this number should be set when the user selects the crypto to get detail on from the previous activity
+        //this number should be set when the user selects the crypto to get detail on from the previous activity
+        arrayPosition = 0;
+
         //load crypto image
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
                 .execute(cryptoDetailArray[arrayPosition].image);

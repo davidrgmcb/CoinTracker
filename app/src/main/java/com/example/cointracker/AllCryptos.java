@@ -55,11 +55,9 @@ public class AllCryptos extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //getCrypto();
+
         cryptoList = cryptoList.getInstance();
 
-        //System.out.println(cryptoList);
-        //Toast.makeText(this, "******** = " + cryptoList.getListCDP()[0].name, Toast.LENGTH_LONG).show(); 
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.recyclerview10);
         // Create an adapter and supply the data to be displayed.

@@ -42,14 +42,17 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = cryptoList.getInstance();
-        //Bad comment
+
     }
 
     public void display(View view) {
         Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_LONG).show();
+
+        //go to all cryptos activity
         //Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
         //MainActivity.this.startActivity(myIntent);
 
+        //go to crypto detail activity
         Intent myIntent = new Intent(MainActivity.this, cryptoDetail.class);
         MainActivity.this.startActivity(myIntent);
     }
