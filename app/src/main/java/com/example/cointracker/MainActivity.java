@@ -1,5 +1,6 @@
 package com.example.cointracker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity {
     private ListOfCrypto cryptoList = null;
@@ -51,9 +54,13 @@ public class MainActivity extends AppCompatActivity {
         //Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
         //MainActivity.this.startActivity(myIntent);
 
+        cryptoList.update("USD", new WeakReference<Activity>(this));
         //go to crypto detail activity
-        Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
-        MainActivity.this.startActivity(myIntent);
+        //Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
+        //MainActivity.this.startActivity(myIntent);
+    }
+
+    static void update() {
     }
 }
 

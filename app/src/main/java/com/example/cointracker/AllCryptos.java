@@ -59,6 +59,6 @@ public class AllCryptos extends AppCompatActivity {
 
     }
 
-
+    static void update() {}
 
 }
