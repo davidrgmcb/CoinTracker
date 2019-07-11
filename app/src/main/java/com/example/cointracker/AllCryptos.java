@@ -25,11 +25,11 @@ public class AllCryptos extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     myIntent = new Intent(AllCryptos.this, MainActivity.class);
-                    AllCryptos.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(AllCryptos.this, Portfolio.class);
-                    AllCryptos.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
                     return false;

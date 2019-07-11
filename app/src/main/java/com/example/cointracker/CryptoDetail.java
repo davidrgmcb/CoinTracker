@@ -32,15 +32,15 @@ public class CryptoDetail extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     myIntent = new Intent(CryptoDetail.this, MainActivity.class);
-                    CryptoDetail.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(CryptoDetail.this, Portfolio.class);
-                    CryptoDetail.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
                     myIntent = new Intent(CryptoDetail.this, AllCryptos.class);
-                    CryptoDetail.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
             }
             return false;

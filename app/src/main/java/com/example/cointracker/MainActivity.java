@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(MainActivity.this, Portfolio.class);
-                    MainActivity.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
                     myIntent = new Intent(MainActivity.this, AllCryptos.class);
-                    MainActivity.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
             }
             return false;

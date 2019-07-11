@@ -18,13 +18,13 @@ public class Portfolio extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     myIntent = new Intent(Portfolio.this, MainActivity.class);
-                    Portfolio.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
                     return false;
                 case R.id.navigation_all_crypto:
                     myIntent = new Intent(Portfolio.this, AllCryptos.class);
-                    Portfolio.this.startActivity(myIntent);
+                    startActivity(myIntent);
                     return true;
             }
             return false;
