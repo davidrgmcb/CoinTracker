@@ -1,5 +1,6 @@
 package com.example.cointracker;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -13,12 +14,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.io.InputStream;
 
-public class cryptoDetail extends AppCompatActivity {
-    private TextView mTextMessage;
+public class CryptoDetail extends AppCompatActivity {
     private ListOfCrypto cryptoList = null;
     CryptoDataPoints cryptoDetailArray[];
     int arrayPosition;
@@ -29,15 +28,19 @@ public class cryptoDetail extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent myIntent;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    myIntent = new Intent(CryptoDetail.this, MainActivity.class);
+                    CryptoDetail.this.startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
-                    mTextMessage.setText(R.string.title_portfolio);
+                    myIntent = new Intent(CryptoDetail.this, Portfolio.class);
+                    CryptoDetail.this.startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
-                    mTextMessage.setText(R.string.title_all_crypto);
+                    myIntent = new Intent(CryptoDetail.this, AllCryptos.class);
+                    CryptoDetail.this.startActivity(myIntent);
                     return true;
             }
             return false;
@@ -49,7 +52,6 @@ public class cryptoDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crypto_detail);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         cryptoList = cryptoList.getInstance();

@@ -1,26 +1,15 @@
 package com.example.cointracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-
-import java.io.IOException;
 
 public class AllCryptos extends AppCompatActivity {
-    private TextView mTextMessage;
     private ListOfCrypto cryptoList = null;
     private RecyclerView mRecyclerView;
     private AllCryptoAdapter mAdapter;
@@ -32,16 +21,18 @@ public class AllCryptos extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent myIntent;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    myIntent = new Intent(AllCryptos.this, MainActivity.class);
+                    AllCryptos.this.startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
-                    mTextMessage.setText(R.string.title_portfolio);
+                    myIntent = new Intent(AllCryptos.this, Portfolio.class);
+                    AllCryptos.this.startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
-                    mTextMessage.setText(R.string.title_all_crypto);
-                    return true;
+                    return false;
             }
             return false;
         }
@@ -53,7 +44,6 @@ public class AllCryptos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_cryptos);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         cryptoList = cryptoList.getInstance();

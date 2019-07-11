@@ -7,11 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView mTextMessage;
     private ListOfCrypto cryptoList = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -19,17 +17,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent myIntent;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
+                    return false;
                 case R.id.navigation_portfolio:
-                    mTextMessage.setText(R.string.title_portfolio);
+                    myIntent = new Intent(MainActivity.this, Portfolio.class);
+                    MainActivity.this.startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
-                    Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
+                    myIntent = new Intent(MainActivity.this, AllCryptos.class);
                     MainActivity.this.startActivity(myIntent);
-                    mTextMessage.setText(R.string.title_all_crypto);
                     return true;
             }
             return false;
@@ -41,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = cryptoList.getInstance();
 
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         //MainActivity.this.startActivity(myIntent);
 
         //go to crypto detail activity
-        Intent myIntent = new Intent(MainActivity.this, cryptoDetail.class);
+        Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
         MainActivity.this.startActivity(myIntent);
     }
 }
