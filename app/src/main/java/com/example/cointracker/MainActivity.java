@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_portfolio);
                     return true;
                 case R.id.navigation_all_crypto:
+                    Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
+                    MainActivity.this.startActivity(myIntent);
                     mTextMessage.setText(R.string.title_all_crypto);
                     return true;
             }
