@@ -21,7 +21,7 @@ import java.io.InputStream;
 
 public class CryptoDetail extends AppCompatActivity {
     private ListOfCrypto cryptoList = null;
-    CryptoDataPoints cryptoDetailArray[];
+    //CryptoDataPoints cryptoDetailArray[];
     int arrayPosition;
 
     @Override
@@ -32,20 +32,20 @@ public class CryptoDetail extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         cryptoList = cryptoList.getInstance();
-        cryptoDetailArray = cryptoList.getListCDP();
+        //cryptoDetailArray = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
         arrayPosition = (int)getIntent().getDoubleExtra("id", -1) - 1;
 
         TextView name = findViewById(R.id.cryptoName);
-        name.setText("$"+cryptoDetailArray[arrayPosition].name);
+        name.setText("$"+cryptoList.getListCDP()[arrayPosition].name);
 
         TextView currentPrice = findViewById(R.id.currentPrice);
-        currentPrice.setText("$"+cryptoDetailArray[arrayPosition].current_price);
+        currentPrice.setText("$"+cryptoList.getListCDP()[arrayPosition].current_price);
 
 
         //load crypto image
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
-                .execute(cryptoDetailArray[arrayPosition].image);
+                .execute(cryptoList.getListCDP()[arrayPosition].image);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
