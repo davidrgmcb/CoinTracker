@@ -56,9 +56,9 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
-                //Intent i = new Intent(view.getContext(), CryptoDetail.class);
-                //i.putExtra("id", arrayPosition);
-                //view.getContext().startActivity(i);
+                Intent i = new Intent(view.getContext(), Transaction.class);
+                i.putExtra("id", arrayPosition);
+                view.getContext().startActivity(i);
 /*
                 // additional action
                 int wordListSize = mWordList.size();
