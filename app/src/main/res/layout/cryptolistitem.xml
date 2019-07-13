@@ -31,9 +31,9 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="0dp"
         android:text="Bitcoin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/symbol"
@@ -57,7 +57,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginEnd="120dp"
         android:text="$13,000.99"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="18sp" />
 
     <TextView
@@ -69,7 +69,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:text="+8.2%"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="18sp" />
 
     <TextView

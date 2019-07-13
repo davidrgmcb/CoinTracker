@@ -1,6 +1,7 @@
 package com.example.cointracker;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,12 +77,22 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
     public void onBindViewHolder(@NonNull AllCryptoAdapter.CryptoViewHolder holder, int position) {
         CryptoDataPoints currentItem = cryptoList[position];
         holder.cryptoName.setText(currentItem.name);
-        holder.currentPrice.setText("$"+currentItem.current_price);
-        holder.percentageChange.setText(currentItem.price_change_percentage_24h + "%");
-        holder.rank.setText((int)currentItem.market_cap_rank+".");
-        holder.ath.setText("$"+ currentItem.ath);
-        holder.athChange.setText(currentItem.ath_change_percentage+"%");
         holder.ticker.setText(currentItem.symbol);
+        holder.rank.setText((int)currentItem.market_cap_rank + ".");
+
+        holder.currentPrice.setText("$"+currentItem.current_price);
+        holder.percentageChange.setText(String.format("%.2f", currentItem.price_change_percentage_24h) + "%");
+        //conditional formatting of price/ percentage change
+        if (currentItem.price_change_percentage_24h < -1) {
+            holder.currentPrice.setTextColor(Color.parseColor("#b71c1c"));
+            holder.percentageChange.setTextColor(Color.parseColor("#b71c1c"));
+        }else if (currentItem.price_change_percentage_24h > 1){
+            holder.currentPrice.setTextColor(Color.parseColor("#2e7d32"));
+            holder.percentageChange.setTextColor(Color.parseColor("#2e7d32"));
+        }
+
+        holder.ath.setText("$"+ currentItem.ath);
+        holder.athChange.setText(String.format("%.2f", currentItem.ath_change_percentage) + "%");
 
     }
 
