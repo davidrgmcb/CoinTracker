@@ -61,29 +61,6 @@ public class ListOfCrypto {
             if(mListener != null) {
                 mListener.updateUI();
             }
-/*            if (_currentUI != null)
-            {
-                _currentUI.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        switch(_currentUI.get().getLocalClassName())
-                        {
-                            case "MainActivity":
-
-                                break;
-                            case "AllCryptos":
-                                Toast.makeText(_currentUI.get(), "Even finished", Toast.LENGTH_SHORT).show();
-                                break;
-                                default:
-                                    break;
-                        }
-                    }
-                });
-            }
-*/        }
+        }
     }
-
-
-
-
 }

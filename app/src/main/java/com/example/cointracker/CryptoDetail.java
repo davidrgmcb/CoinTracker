@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import java.io.InputStream;
 
-public class CryptoDetail extends AppCompatActivity {
+public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.Listener {
     private ListOfCrypto cryptoList = null;
     //CryptoDataPoints cryptoDetailArray[];
     int arrayPosition;
@@ -31,7 +31,8 @@ public class CryptoDetail extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        cryptoList = cryptoList.getInstance();
+        cryptoList = ListOfCrypto.getInstance();
+        cryptoList.registerListener(this);
         //cryptoDetailArray = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
         arrayPosition = (int)getIntent().getDoubleExtra("id", -1) - 1;
@@ -74,7 +75,15 @@ public class CryptoDetail extends AppCompatActivity {
 
     }
 
+    @Override
+    public void updateUI() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
+            }
+        });
+    }
 
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

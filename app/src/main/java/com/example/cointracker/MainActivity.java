@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        cryptoList = cryptoList.getInstance();
+        cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
     }
 

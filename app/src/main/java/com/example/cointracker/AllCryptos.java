@@ -9,7 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
-public class AllCryptos extends AppCompatActivity {
+public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listener {
     private ListOfCrypto cryptoList = null;
     private RecyclerView mRecyclerView;
     private AllCryptoAdapter mAdapter;
@@ -46,7 +46,8 @@ public class AllCryptos extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        cryptoList = cryptoList.getInstance();
+        cryptoList = ListOfCrypto.getInstance();
+        cryptoList.registerListener(this);
 
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.recyclerview10);
@@ -59,6 +60,13 @@ public class AllCryptos extends AppCompatActivity {
 
     }
 
-    static void update() {}
+    @Override
+    public void updateUI() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
 
+            }
+        });
+    }
 }
