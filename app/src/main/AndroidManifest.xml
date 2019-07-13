@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".cryptoDetail"
+            android:name=".CryptoDetail"
             android:label="@string/title_activity_crypto_detail"></activity>
         <activity
-            android:name=".portfolio"
+            android:name=".Portfolio"
             android:label="@string/title_activity_portfolio" />
         <activity
             android:name=".AllCryptos"

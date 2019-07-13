@@ -67,9 +67,10 @@ public class ListOfCrypto {
                         switch(_currentUI.get().getLocalClassName())
                         {
                             case "MainActivity":
-                                Toast.makeText(_currentUI.get(), "Even finished", Toast.LENGTH_SHORT).show();
+
                                 break;
                             case "AllCryptos":
+                                Toast.makeText(_currentUI.get(), "Even finished", Toast.LENGTH_SHORT).show();
                                 break;
                                 default:
                                     break;

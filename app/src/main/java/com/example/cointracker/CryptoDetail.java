@@ -1,5 +1,6 @@
 package com.example.cointracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -57,7 +58,17 @@ public class CryptoDetail extends AppCompatActivity {
         cryptoList = cryptoList.getInstance();
         cryptoDetailArray = cryptoList.getListCDP();
         //this number should be set when the user selects the crypto to get detail on from the previous activity
-        arrayPosition = 0;
+        arrayPosition = (int)getIntent().getDoubleExtra("id", -1) - 1;
+
+        //Intent intent = this.getIntent();
+        //String gameId = intent.getStringExtra(EXTRA_GAME_ID);
+
+        //Bundle b = getIntent().getExtras();
+        //int id = b.getInt("id");
+
+        //int id = (int)getIntent().getDoubleExtra("id", -1);
+        //String inReplyTo = getIntent().getStringExtra("in_reply_to");
+        //int code = getIntent().getIntExtra("code", 0);
 
         //load crypto image
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
@@ -83,6 +94,15 @@ public class CryptoDetail extends AppCompatActivity {
         });
 
     }
+
+    private static final String EXTRA_GAME_ID = "your.package.gameId";
+
+    public static void start(Context context, String cryptoId) {
+        Intent intent = new Intent(context, CryptoDetail.class);
+        intent.putExtra(EXTRA_GAME_ID, cryptoId);
+        context.startActivity(intent);
+    }
+
 
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
