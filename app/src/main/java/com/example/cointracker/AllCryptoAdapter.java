@@ -43,30 +43,11 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
             int mPosition = getLayoutPosition();
             // Use that to access the affected item in cryptoList.
             double idClicked = cryptoList[mPosition].market_cap_rank; //get(mPosition);
-            System.out.println("****************"+idClicked);
-
-            // Change the word in the mWordList.
-            //cryptoList[mPosition].name = "Clicked + " + idClicked; //set(mPosition, "Clicked! " + element);
-            // Notify the adapter, that the data has changed so it can
-            // update the RecyclerView to display the data.
-            //mAdapter.notifyDataSetChanged();
-
-
-                // first parameter is the context, second is the class of the activity to launch
-               // Intent i = new Intent(context, CryptoDetail.class);
-                // put "extras" into the bundle for access in the second activity
-                //i.putExtra("username", "foobar");
-                //i.putExtra("in_reply_to", "george");
-                //i.putExtra("code", 400);
-                // brings up the second activity
-                //startActivity(i);
-
 
             Intent i = new Intent(v.getContext(), CryptoDetail.class);
             i.putExtra("id", idClicked);
             v.getContext().startActivity(i);
 
-            //CryptoDetail.start(this, idClicked);
         }
     }
 

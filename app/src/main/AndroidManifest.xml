@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Transaction"
+            android:label="@string/title_activity_transaction"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".CryptoDetail"
-            android:label="@string/title_activity_crypto_detail"></activity>
+            android:label="@string/title_activity_crypto_detail" />
         <activity
             android:name=".Portfolio"
             android:label="@string/title_activity_portfolio" />

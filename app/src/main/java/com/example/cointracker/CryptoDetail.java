@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.InputStream;
 
@@ -22,31 +23,6 @@ public class CryptoDetail extends AppCompatActivity {
     private ListOfCrypto cryptoList = null;
     CryptoDataPoints cryptoDetailArray[];
     int arrayPosition;
-
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Intent myIntent;
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    myIntent = new Intent(CryptoDetail.this, MainActivity.class);
-                    startActivity(myIntent);
-                    return true;
-                case R.id.navigation_portfolio:
-                    myIntent = new Intent(CryptoDetail.this, Portfolio.class);
-                    startActivity(myIntent);
-                    return true;
-                case R.id.navigation_all_crypto:
-                    myIntent = new Intent(CryptoDetail.this, AllCryptos.class);
-                    startActivity(myIntent);
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +33,15 @@ public class CryptoDetail extends AppCompatActivity {
 
         cryptoList = cryptoList.getInstance();
         cryptoDetailArray = cryptoList.getListCDP();
-        //this number should be set when the user selects the crypto to get detail on from the previous activity
+        //get the array position of the coin by subtracting 1 from the crypto rank passed in
         arrayPosition = (int)getIntent().getDoubleExtra("id", -1) - 1;
 
-        //Intent intent = this.getIntent();
-        //String gameId = intent.getStringExtra(EXTRA_GAME_ID);
+        TextView name = findViewById(R.id.cryptoName);
+        name.setText("$"+cryptoDetailArray[arrayPosition].name);
 
-        //Bundle b = getIntent().getExtras();
-        //int id = b.getInt("id");
+        TextView currentPrice = findViewById(R.id.currentPrice);
+        currentPrice.setText("$"+cryptoDetailArray[arrayPosition].current_price);
 
-        //int id = (int)getIntent().getDoubleExtra("id", -1);
-        //String inReplyTo = getIntent().getStringExtra("in_reply_to");
-        //int code = getIntent().getIntExtra("code", 0);
 
         //load crypto image
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
@@ -81,6 +54,10 @@ public class CryptoDetail extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                //Intent i = new Intent(view.getContext(), CryptoDetail.class);
+                //i.putExtra("id", arrayPosition);
+                //view.getContext().startActivity(i);
 /*
                 // additional action
                 int wordListSize = mWordList.size();
@@ -90,18 +67,13 @@ public class CryptoDetail extends AppCompatActivity {
                 mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
                 // Scroll to the bottom.
                 mRecyclerView.smoothScrollToPosition(wordListSize);
+
+
   */          }
         });
 
     }
 
-    private static final String EXTRA_GAME_ID = "your.package.gameId";
-
-    public static void start(Context context, String cryptoId) {
-        Intent intent = new Intent(context, CryptoDetail.class);
-        intent.putExtra(EXTRA_GAME_ID, cryptoId);
-        context.startActivity(intent);
-    }
 
 
 
@@ -129,5 +101,29 @@ public class CryptoDetail extends AppCompatActivity {
             bmImage.setImageBitmap(result);
         }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent myIntent;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    myIntent = new Intent(CryptoDetail.this, MainActivity.class);
+                    startActivity(myIntent);
+                    return true;
+                case R.id.navigation_portfolio:
+                    myIntent = new Intent(CryptoDetail.this, Portfolio.class);
+                    startActivity(myIntent);
+                    return true;
+                case R.id.navigation_all_crypto:
+                    myIntent = new Intent(CryptoDetail.this, AllCryptos.class);
+                    startActivity(myIntent);
+                    return true;
+            }
+            return false;
+        }
+    };
 
 }

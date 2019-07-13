@@ -7,4 +7,5 @@
     <string name="title_activity_portfolio">Portfolio</string>
     <string name="title_activity_crypto_detail">Crypto Detail</string>
     <string name="default_currency">USD</string>
+    <string name="title_activity_transaction">Transaction</string>
 </resources>
