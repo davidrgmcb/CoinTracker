@@ -16,20 +16,25 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
 
     class CryptoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final AllCryptoAdapter mAdapter;
-        public final TextView cryptoName;
-        TextView cryptoPrice;
+        TextView cryptoName;
+        TextView ticker;
+        TextView currentPrice;
         TextView percentageChange;
         TextView rank;
         TextView ath;
+        TextView athChange;
 
 
         public CryptoViewHolder(View itemView, AllCryptoAdapter adapter){
             super(itemView);
             cryptoName = itemView.findViewById(R.id.cryptoName);
-            cryptoPrice = itemView.findViewById(R.id.cryptoPrice);
+            currentPrice = itemView.findViewById(R.id.currentPrice);
             percentageChange = itemView.findViewById(R.id.percentageChange);
             ath = itemView.findViewById(R.id.allTimeHigh);
             rank = itemView.findViewById(R.id.rank);
+            athChange = itemView.findViewById(R.id.ath_change);
+            ticker = itemView.findViewById(R.id.symbol);
+
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);
         }
@@ -70,11 +75,13 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
     @Override
     public void onBindViewHolder(@NonNull AllCryptoAdapter.CryptoViewHolder holder, int position) {
         CryptoDataPoints currentItem = cryptoList[position];
-        holder.cryptoName.setText(currentItem.name);//mCurrent);
-        holder.cryptoPrice.setText("$"+currentItem.current_price);
+        holder.cryptoName.setText(currentItem.name);
+        holder.currentPrice.setText("$"+currentItem.current_price);
         holder.percentageChange.setText(currentItem.price_change_percentage_24h + "%");
-        holder.rank.setText("#"+currentItem.market_cap_rank);
+        holder.rank.setText((int)currentItem.market_cap_rank+".");
         holder.ath.setText("$"+ currentItem.ath);
+        holder.athChange.setText(currentItem.ath_change_percentage+"%");
+        holder.ticker.setText(currentItem.symbol);
 
     }
 

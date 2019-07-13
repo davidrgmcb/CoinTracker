@@ -12,69 +12,87 @@
     android:layout_height="match_parent"
     android:layout_margin="4dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="2dp" />
-
     <TextView
         android:id="@+id/rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="Rank"
+        android:text="1."
         android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/cryptoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="-2dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="Crypto Name"
+        android:layout_below="@+id/symbol"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="0dp"
+        android:text="Bitcoin"
         android:textColor="@android:color/black"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/cryptoPrice"
+        android:id="@+id/symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cryptoName"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="1dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="Crypto Price"
-        android:textSize="15sp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/rank"
+        android:text="BTC"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/currentPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/percentageChange"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="120dp"
+        android:text="$13,000.99"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/percentageChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cryptoName"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="-1dp"
-        android:layout_toEndOf="@+id/cryptoPrice"
-        android:text="Percentage Change"
-        android:textSize="15sp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:text="+8.2%"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/allTimeHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cryptoName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-1dp"
-        android:text="All Time High"
-        android:textSize="15sp" />
+        android:layout_alignEnd="@+id/currentPrice"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="0dp"
+        android:text="$19,999.00"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/ath_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/percentageChange"
+        android:layout_alignEnd="@+id/percentageChange"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:text="-67.1%"
+        android:textSize="14sp" />
 
 </RelativeLayout>
 
