@@ -1,6 +1,7 @@
 package com.example.cointracker;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -10,10 +11,74 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity {
     private ListOfCrypto cryptoList = null;
+    public String portfolioFilename = "myPortfolio.txt";
+    public String getPortfolioFilename(){
+        return portfolioFilename;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        cryptoList = cryptoList.getInstance();
+
+
+        //check if portfolio file exists, if not, create it
+        File file = new File(getFilesDir()+"/"+portfolioFilename);
+        if(file.exists())
+            System.out.println("*** " + file + " file exists!");
+        else
+            try {
+                System.out.println("*** creating new file...");
+                FileOutputStream outputStream;
+                String fileContents = "[]";
+                outputStream = openFileOutput(portfolioFilename, Context.MODE_PRIVATE);
+                outputStream.write(fileContents.getBytes());
+                outputStream.close();
+                System.out.println("*** " + getFilesDir()+"/"+portfolioFilename+ " created!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        /*
+        System.out.println("*** deleting file...");
+        file.delete();
+        if(file.exists())
+            System.out.println("*** " + file + " file exists!");
+        else
+            System.out.println("*** file does not exist");
+            */
+    }
+
+
+    public void display(View view) {
+        Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_LONG).show();
+
+        //go to all cryptos activity
+        //Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
+        //MainActivity.this.startActivity(myIntent);
+
+        cryptoList.update("USD", new WeakReference<Activity>(this));
+        //go to crypto detail activity
+        //Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
+        //MainActivity.this.startActivity(myIntent);
+    }
+
+    static void update() {
+
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,31 +102,5 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        cryptoList = cryptoList.getInstance();
-
-    }
-
-    public void display(View view) {
-        Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_LONG).show();
-
-        //go to all cryptos activity
-        //Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
-        //MainActivity.this.startActivity(myIntent);
-
-        cryptoList.update("USD", new WeakReference<Activity>(this));
-        //go to crypto detail activity
-        //Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
-        //MainActivity.this.startActivity(myIntent);
-    }
-
-    static void update() {
-
-    }
 }
 
