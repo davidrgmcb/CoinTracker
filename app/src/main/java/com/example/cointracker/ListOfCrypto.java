@@ -1,16 +1,21 @@
 package com.example.cointracker;
 
-import android.app.Activity;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 
 public class ListOfCrypto {
     private ListOfCrypto() {
         CryptoTask task = new CryptoTask("USD");
         task.start();
+    }
+
+    public interface Listener {
+        void updateUI();
+    }
+
+    private Listener mListener = null;
+    public void registerListener (Listener listener) {
+        mListener = listener;
     }
 
     private static ListOfCrypto INSTANCE = null;
@@ -31,22 +36,16 @@ public class ListOfCrypto {
         this.listCDP = listCDP;
     }
 
-    public synchronized void update(String currency, WeakReference<Activity> currentUI) {
-        CryptoTask task = new CryptoTask(currency, currentUI);
+    public synchronized void update(String currency) {
+        CryptoTask task = new CryptoTask(currency);
         task.start();
     }
 
     private class CryptoTask extends Thread {
         String _currency;
-        WeakReference<Activity> _currentUI = null;
 
         CryptoTask(String currency) {
             _currency = currency;
-        }
-
-        CryptoTask(String currency, WeakReference<Activity> currentUI){
-            _currency = currency;
-            _currentUI = currentUI;
         }
 
         @Override
@@ -59,24 +58,8 @@ public class ListOfCrypto {
             }
 
             setListCDP(new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class));
-            if (_currentUI != null)
-            {
-                _currentUI.get().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        switch(_currentUI.get().getLocalClassName())
-                        {
-                            case "MainActivity":
-
-                                break;
-                            case "AllCryptos":
-                                Toast.makeText(_currentUI.get(), "Even finished", Toast.LENGTH_SHORT).show();
-                                break;
-                                default:
-                                    break;
-                        }
-                    }
-                });
+            if(mListener != null) {
+                mListener.updateUI();
             }
         }
     }

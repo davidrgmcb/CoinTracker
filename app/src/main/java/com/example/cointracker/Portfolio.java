@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 
-public class Portfolio extends AppCompatActivity {
+public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listener {
+
+    private ListOfCrypto cryptoList = null;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,6 +39,17 @@ public class Portfolio extends AppCompatActivity {
         setContentView(R.layout.activity_portfolio);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        cryptoList = ListOfCrypto.getInstance();
+        cryptoList.registerListener(this);
     }
 
+    @Override
+    public void updateUI() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+    }
 }

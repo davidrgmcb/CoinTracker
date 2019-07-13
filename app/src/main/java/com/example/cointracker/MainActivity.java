@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListOfCrypto.Listener{
     private ListOfCrypto cryptoList = null;
     public String portfolioFilename = "myPortfolio.txt";
     public String getPortfolioFilename(){
@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = cryptoList.getInstance();
+        cryptoList.registerListener(this);
+
 
 
         //check if portfolio file exists, if not, create it
@@ -64,20 +66,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void display(View view) {
-        Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_SHORT).show();
 
         //go to all cryptos activity
         //Intent myIntent = new Intent(MainActivity.this, AllCryptos.class);
         //MainActivity.this.startActivity(myIntent);
 
-        cryptoList.update("USD", new WeakReference<Activity>(this));
+        cryptoList.update("USD");
         //go to crypto detail activity
         //Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
         //MainActivity.this.startActivity(myIntent);
     }
 
-    static void update() {
-
+    @Override
+    public void updateUI() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, cryptoList.getListCDP()[0].name, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
