@@ -1,6 +1,5 @@
 package com.example.cointracker;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +9,9 @@ import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.ref.WeakReference;
+
 
 public class MainActivity extends AppCompatActivity implements ListOfCrypto.Listener{
     private ListOfCrypto cryptoList = null;
@@ -32,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        cryptoList = cryptoList.getInstance();
+        cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
 
 
