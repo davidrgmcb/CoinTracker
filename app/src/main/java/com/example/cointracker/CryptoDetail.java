@@ -42,7 +42,7 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
 
         TextView currentPrice = findViewById(R.id.currentPrice);
         currentPrice.setText("$"+cryptoList.getListCDP()[arrayPosition].current_price);
-
+//
 
         //load crypto image
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))

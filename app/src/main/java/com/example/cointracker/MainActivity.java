@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+//
         /*
         System.out.println("*** deleting file...");
         file.delete();

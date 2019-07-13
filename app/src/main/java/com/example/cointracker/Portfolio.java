@@ -48,7 +48,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+//add stuff
             }
         });
     }

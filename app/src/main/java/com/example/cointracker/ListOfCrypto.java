@@ -56,7 +56,7 @@ public class ListOfCrypto {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+//
             setListCDP(new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class));
             if(mListener != null) {
                 mListener.updateUI();

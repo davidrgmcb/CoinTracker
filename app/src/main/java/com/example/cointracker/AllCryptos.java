@@ -38,7 +38,7 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
         }
     };
 
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
