@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 
 public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listener {
@@ -34,7 +35,7 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
-                    return false;
+                    return true;
             }
             return false;
         }
@@ -61,6 +62,18 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_all_crypto);
     }
 
     @Override

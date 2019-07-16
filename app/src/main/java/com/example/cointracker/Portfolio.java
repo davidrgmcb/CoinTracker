@@ -24,7 +24,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
-                    return false;
+                    return true;
                 case R.id.navigation_all_crypto:
                     myIntent = new Intent(Portfolio.this, AllCryptos.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -44,6 +44,18 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         navView.setSelectedItemId(R.id.navigation_portfolio);
         cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_portfolio);
     }
 
     @Override

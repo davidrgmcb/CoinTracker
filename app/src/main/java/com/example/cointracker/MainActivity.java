@@ -59,6 +59,17 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
             */
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_home);
+    }
 
     public void display(View view) {
         //Toast.makeText(this, cryptoList.getListCDP()[1].name, Toast.LENGTH_SHORT).show();
@@ -92,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
             Intent myIntent;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    return false;
+                    return true;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(MainActivity.this, Portfolio.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
