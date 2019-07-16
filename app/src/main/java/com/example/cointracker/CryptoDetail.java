@@ -36,6 +36,7 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crypto_detail);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_home);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         cryptoList = ListOfCrypto.getInstance();
@@ -887,14 +888,17 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     myIntent = new Intent(CryptoDetail.this, MainActivity.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(CryptoDetail.this, Portfolio.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
                     myIntent = new Intent(CryptoDetail.this, AllCryptos.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
             }

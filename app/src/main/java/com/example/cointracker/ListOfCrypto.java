@@ -20,7 +20,8 @@ public class ListOfCrypto {
         if(mListener == null) {
             mListener = new ArrayList<>();
         }
-        mListener.add(listener);
+        if(!mListener.contains(listener))
+            mListener.add(listener);
     }
 
     private static ListOfCrypto INSTANCE = null;

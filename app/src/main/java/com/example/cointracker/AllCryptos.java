@@ -25,10 +25,12 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     myIntent = new Intent(AllCryptos.this, MainActivity.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(AllCryptos.this, Portfolio.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
@@ -44,6 +46,7 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_cryptos);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_all_crypto);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         cryptoList = ListOfCrypto.getInstance();

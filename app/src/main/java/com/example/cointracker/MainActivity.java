@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setSelectedItemId(R.id.navigation_home);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
@@ -71,13 +72,14 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         //Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
         //MainActivity.this.startActivity(myIntent);
     }
-
+    static int count = 0;
     @Override
     public void updateUI() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                ++count;
+                Log.d("updateUI", "" + count);
             }
         });
     }
@@ -93,10 +95,12 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
                     return false;
                 case R.id.navigation_portfolio:
                     myIntent = new Intent(MainActivity.this, Portfolio.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
                     myIntent = new Intent(MainActivity.this, AllCryptos.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
             }
