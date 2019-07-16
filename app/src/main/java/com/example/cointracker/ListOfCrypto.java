@@ -2,6 +2,8 @@ package com.example.cointracker;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListOfCrypto {
     private ListOfCrypto() {
@@ -13,9 +15,12 @@ public class ListOfCrypto {
         void updateUI();
     }
 
-    private Listener mListener = null;
+    private List<Listener> mListener = null;
     public void registerListener (Listener listener) {
-        mListener = listener;
+        if(mListener == null) {
+            mListener = new ArrayList<>();
+        }
+        mListener.add(listener);
     }
 
     private static ListOfCrypto INSTANCE = null;
@@ -59,7 +64,9 @@ public class ListOfCrypto {
 //
             setListCDP(new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class));
             if(mListener != null) {
-                mListener.updateUI();
+                for (Listener l: mListener) {
+                    l.updateUI();
+                }
             }
         }
     }

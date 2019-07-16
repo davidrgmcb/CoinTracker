@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, cryptoList.getListCDP()[0].name, Toast.LENGTH_SHORT).show();
+
             }
         });
     }
