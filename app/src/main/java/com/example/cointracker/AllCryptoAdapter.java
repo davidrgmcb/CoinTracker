@@ -50,7 +50,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
             double idClicked = cryptoList[mPosition].market_cap_rank; //get(mPosition);
 
             Intent i = new Intent(v.getContext(), CryptoDetail.class);
-            i.putExtra("id", idClicked);
+            i.putExtra("rank", idClicked);
             v.getContext().startActivity(i);
 
         }

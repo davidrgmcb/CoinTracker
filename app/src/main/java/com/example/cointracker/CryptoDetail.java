@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -43,7 +44,7 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
         cryptoList.registerListener(this);
         //cryptoDetailArray = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
-        arrayPosition = (int)getIntent().getDoubleExtra("id", -1) - 1;
+        arrayPosition = (int)getIntent().getDoubleExtra("rank", -1) - 1;
 
         TextView name = findViewById(R.id.cryptoName);
         name.setText("$"+cryptoList.getListCDP()[arrayPosition].name);
@@ -65,13 +66,15 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
         // api endpoint: https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180
         MarketChartDataPoints marketData = new Gson().fromJson(sampleData, MarketChartDataPoints.class);
         LineChart chart = findViewById(R.id.chart);
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setDrawLabels(false);
         //map data from MarketChartDataPoints to objects for chart
         List<Entry> entries = new ArrayList<Entry>();
         for (double[] data : marketData.prices) {
             // turn your data into Entry objects
             entries.add(new Entry((float)data[0], (float)data[1] ));
         }
-        LineDataSet dataSet = new LineDataSet(entries, "Label");
+        LineDataSet dataSet = new LineDataSet(entries, "Price - USD");
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
         chart.invalidate(); // refresh
@@ -85,7 +88,7 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
                         .setAction("Action", null).show();
 
                 Intent i = new Intent(view.getContext(), Transaction.class);
-                i.putExtra("id", arrayPosition);
+                i.putExtra("rank", arrayPosition);
                 view.getContext().startActivity(i);
 /*
                 // additional action
