@@ -24,7 +24,7 @@ public class Transaction extends AppCompatActivity {
     double quantityPurchased;
     double currentPrice;
     double amountExchanged;
-    PortfolioData[] portfolioDataEntries; //i think this needs to be an array..
+    PortfolioData[] portfolioDataEntries;
 
     class PortfolioData{
         String id;
@@ -67,7 +67,7 @@ public class Transaction extends AppCompatActivity {
         String text = buffer.toString();
         System.out.println("****"+text);
 
-        //portfolioDataEntries = new Gson().fromJson(text, PortfolioData.class);//and i think this needs to be an array..
+        portfolioDataEntries = new Gson().fromJson(text, PortfolioData[].class);
 
 //
     }
