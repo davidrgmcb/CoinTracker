@@ -1,5 +1,6 @@
 package com.example.cointracker;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
@@ -75,31 +77,58 @@ public class Transaction extends AppCompatActivity {
             buffer.append(line + "\n");
         }
         String text = buffer.toString();
-        System.out.println("****"+text);
+        System.out.println("*** portfolio file read: "+text);
 
         Type portfolioType = new TypeToken<ArrayList<PortfolioData>>(){}.getType();
 
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
+        System.out.println("*** json parsed");
 
 
-        for (PortfolioData entry: portfolioDataEntries){
-            System.out.println("***" + entry.id);
-            if (entry.id == id){
-                //update entry with weightedAveragePrice and totalQuantityOwned
-                entry.totalQuantityOwned += quantityPurchased;
-                entry.weightedAveragePriceUSD =
-                        (entry.weightedAveragePriceUSD + (pricePerCoin * quantityPurchased))
-                                / entry.totalQuantityOwned;
-            }else{
-                //create new entry and add to collection
-                PortfolioData newEntry = new PortfolioData();
-                newEntry.id = id;
-                newEntry.totalQuantityOwned = quantityPurchased;
-                newEntry.weightedAveragePriceUSD = pricePerCoin;
-                portfolioDataEntries.add(newEntry);
+        if (portfolioDataEntries.isEmpty()){
+            //create the first entry
+            PortfolioData newEntry = new PortfolioData();
+            newEntry.id = id;
+            newEntry.totalQuantityOwned = quantityPurchased;
+            newEntry.weightedAveragePriceUSD = pricePerCoin;
+            portfolioDataEntries.add(newEntry);
+            System.out.println("*** first entry.id: " + newEntry.id);
+        }else {
+            for (PortfolioData entry: portfolioDataEntries){
+                System.out.println("*** for each entry.id: " + entry.id);
+                if (entry.id.equals(id) ){
+                    //update entry with weightedAveragePrice and totalQuantityOwned
+                    entry.totalQuantityOwned += quantityPurchased;
+                    entry.weightedAveragePriceUSD =
+                            (entry.weightedAveragePriceUSD + (pricePerCoin * quantityPurchased))
+                                    / entry.totalQuantityOwned;
+                }else{
+                    //create new entry and add to collection
+                    PortfolioData newEntry = new PortfolioData();
+                    newEntry.id = id;
+                    newEntry.totalQuantityOwned = quantityPurchased;
+                    newEntry.weightedAveragePriceUSD = pricePerCoin;
+                    portfolioDataEntries.add(newEntry);
+                    System.out.println("*** new entry.id: " + newEntry.id);
+                }
             }
+
         }
 
+        Gson gson = new Gson();
+        String updatedPortfolio = gson.toJson(portfolioDataEntries);
+
+        try {
+            System.out.println("*** updating portfolio file...");
+            FileOutputStream outputStream;
+            String fileContents = updatedPortfolio;
+            outputStream = openFileOutput("myPortfolio.txt", Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+            System.out.println("*** " + getFilesDir()+"/"+"myPortfolio.txt"+ " updated!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //
     }
 
