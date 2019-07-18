@@ -58,23 +58,6 @@ public class Transaction extends AppCompatActivity {
         TextView name = findViewById(R.id.crypto_name);
         name.setText(cryptoList.getListCDP()[arrayPosition].name);
 
-        EditText et_quantityPurchased = findViewById(R.id.quantity_purchased);
-        String string_quantityPurchased = et_quantityPurchased.getText().toString();
-        quantityPurchased = Double.parseDouble(string_quantityPurchased);
-
-        EditText et_amountExchanged = findViewById(R.id.amount_exchanged);
-        String string_amountExchanged = et_amountExchanged.getText().toString();
-        amountExchanged = Double.parseDouble(string_amountExchanged);
-
-
-        //quantityPurchased = 20; //just for testing. should get value from textedit/user input
-        amountExchanged = 100;
-        pricePerCoin = amountExchanged/quantityPurchased;
-
-        TextView tv_pricePerCoin = findViewById(R.id.price_per_coin);
-        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
-
-
         // read portfolio file from internal storage
         BufferedReader input = null;
         try {
@@ -100,6 +83,29 @@ public class Transaction extends AppCompatActivity {
 
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
         System.out.println("*** json parsed");
+
+    }
+
+
+
+    void saveTransaction(){
+
+        EditText et_quantityPurchased = findViewById(R.id.quantity_purchased);
+        String string_quantityPurchased = et_quantityPurchased.getText().toString();
+        quantityPurchased = Double.parseDouble(string_quantityPurchased);
+
+        EditText et_amountExchanged = findViewById(R.id.amount_exchanged);
+        String string_amountExchanged = et_amountExchanged.getText().toString();
+        amountExchanged = Double.parseDouble(string_amountExchanged);
+
+
+        //quantityPurchased = 20; //just for testing. should get value from textedit/user input
+        //amountExchanged = 100;
+        pricePerCoin = amountExchanged/quantityPurchased;
+
+        TextView tv_pricePerCoin = findViewById(R.id.price_per_coin);
+        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
+
 
         boolean coinFound = false;
         if (portfolioDataEntries.isEmpty()){
@@ -150,9 +156,7 @@ public class Transaction extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//
     }
-
 
 
 }
