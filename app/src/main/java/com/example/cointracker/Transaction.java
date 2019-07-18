@@ -8,11 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,6 @@ public class Transaction extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class Transaction extends AppCompatActivity {
         cryptoList = cryptoList.getInstance();
         cryptoDetailArray = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
-        arrayPosition = (int)getIntent().getDoubleExtra("arrayPosition", -1) ;
+        arrayPosition = getIntent().getIntExtra("arrayPosition", -1) ;
 
         id = cryptoList.getListCDP()[arrayPosition].id;
 
@@ -76,7 +77,9 @@ public class Transaction extends AppCompatActivity {
         String text = buffer.toString();
         System.out.println("****"+text);
 
-        portfolioDataEntries = (List<PortfolioData>) new Gson().fromJson(text, PortfolioData.class);
+        Type portfolioType = new TypeToken<ArrayList<PortfolioData>>(){}.getType();
+
+        portfolioDataEntries = new Gson().fromJson(text, portfolioType);
 
 
         for (PortfolioData entry: portfolioDataEntries){
