@@ -81,7 +81,7 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
                         .setAction("Action", null).show();
 
                 Intent i = new Intent(view.getContext(), Transaction.class);
-                i.putExtra("rank", arrayPosition);
+                i.putExtra("arrayPosition", arrayPosition);
                 view.getContext().startActivity(i);
             }
         });

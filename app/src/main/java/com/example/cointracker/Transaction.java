@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Transaction extends AppCompatActivity {
 
@@ -22,15 +24,16 @@ public class Transaction extends AppCompatActivity {
 
     String id;
     double quantityPurchased;
-    double currentPrice;
+    double pricePerCoin;
     double amountExchanged;
-    PortfolioData[] portfolioDataEntries;
+    List<PortfolioData> portfolioDataEntries = new ArrayList<>();
 
     class PortfolioData{
         String id;
         double totalQuantityOwned;
         double weightedAveragePriceUSD;
     }
+
 
 
     @Override
@@ -43,7 +46,13 @@ public class Transaction extends AppCompatActivity {
         cryptoList = cryptoList.getInstance();
         cryptoDetailArray = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
-        arrayPosition = (int)getIntent().getDoubleExtra("rank", -1) - 1;
+        arrayPosition = (int)getIntent().getDoubleExtra("arrayPosition", -1) ;
+
+        id = cryptoList.getListCDP()[arrayPosition].id;
+
+        quantityPurchased = 20; //just for testing. should get value from textedit/user input
+        amountExchanged = 100;
+        pricePerCoin = amountExchanged/quantityPurchased;
 
 
         // read portfolio file from internal storage
@@ -67,7 +76,26 @@ public class Transaction extends AppCompatActivity {
         String text = buffer.toString();
         System.out.println("****"+text);
 
-        portfolioDataEntries = new Gson().fromJson(text, PortfolioData[].class);
+        portfolioDataEntries = (List<PortfolioData>) new Gson().fromJson(text, PortfolioData.class);
+
+
+        for (PortfolioData entry: portfolioDataEntries){
+            System.out.println("***" + entry.id);
+            if (entry.id == id){
+                //update entry with weightedAveragePrice and totalQuantityOwned
+                entry.totalQuantityOwned += quantityPurchased;
+                entry.weightedAveragePriceUSD =
+                        (entry.weightedAveragePriceUSD + (pricePerCoin * quantityPurchased))
+                                / entry.totalQuantityOwned;
+            }else{
+                //create new entry and add to collection
+                PortfolioData newEntry = new PortfolioData();
+                newEntry.id = id;
+                newEntry.totalQuantityOwned = quantityPurchased;
+                newEntry.weightedAveragePriceUSD = pricePerCoin;
+                portfolioDataEntries.add(newEntry);
+            }
+        }
 
 //
     }
