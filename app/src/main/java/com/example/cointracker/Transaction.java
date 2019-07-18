@@ -84,7 +84,7 @@ public class Transaction extends AppCompatActivity {
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
         System.out.println("*** json parsed");
 
-
+        boolean coinFound = false;
         if (portfolioDataEntries.isEmpty()){
             //create the first entry
             PortfolioData newEntry = new PortfolioData();
@@ -102,16 +102,19 @@ public class Transaction extends AppCompatActivity {
                     portfolioDataEntries.get(ii).weightedAveragePriceUSD =
                             (portfolioDataEntries.get(ii).weightedAveragePriceUSD + (pricePerCoin * quantityPurchased))
                                     / portfolioDataEntries.get(ii).totalQuantityOwned;
+                    //break;
+                    coinFound = true;
                     break;
-                }else{
-                    //create new entry and add to collection
-                    PortfolioData newEntry = new PortfolioData();
-                    newEntry.id = id;
-                    newEntry.totalQuantityOwned = quantityPurchased;
-                    newEntry.weightedAveragePriceUSD = pricePerCoin;
-                    portfolioDataEntries.add(newEntry);
-                    System.out.println("*** new entry.id: " + newEntry.id);
                 }
+            }
+            if (coinFound == false){
+                //create new entry and add to collection
+                PortfolioData newEntry = new PortfolioData();
+                newEntry.id = id;
+                newEntry.totalQuantityOwned = quantityPurchased;
+                newEntry.weightedAveragePriceUSD = pricePerCoin;
+                portfolioDataEntries.add(newEntry);
+                System.out.println("*** new entry.id: " + newEntry.id);
             }
 
         }
