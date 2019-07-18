@@ -94,14 +94,15 @@ public class Transaction extends AppCompatActivity {
             portfolioDataEntries.add(newEntry);
             System.out.println("*** first entry.id: " + newEntry.id);
         }else {
-            for (PortfolioData entry: portfolioDataEntries){
-                System.out.println("*** for each entry.id: " + entry.id);
-                if (entry.id.equals(id) ){
+            for (int ii = 0; ii < portfolioDataEntries.size(); ii++){
+                //System.out.println("*** for each entry.id: " + entry.id);
+                if (portfolioDataEntries.get(ii).id.equals(id) ){
                     //update entry with weightedAveragePrice and totalQuantityOwned
-                    entry.totalQuantityOwned += quantityPurchased;
-                    entry.weightedAveragePriceUSD =
-                            (entry.weightedAveragePriceUSD + (pricePerCoin * quantityPurchased))
-                                    / entry.totalQuantityOwned;
+                    portfolioDataEntries.get(ii).totalQuantityOwned += quantityPurchased;
+                    portfolioDataEntries.get(ii).weightedAveragePriceUSD =
+                            (portfolioDataEntries.get(ii).weightedAveragePriceUSD + (pricePerCoin * quantityPurchased))
+                                    / portfolioDataEntries.get(ii).totalQuantityOwned;
+                    break;
                 }else{
                     //create new entry and add to collection
                     PortfolioData newEntry = new PortfolioData();
