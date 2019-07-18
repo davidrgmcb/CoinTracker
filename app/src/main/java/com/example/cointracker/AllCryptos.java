@@ -81,7 +81,9 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                mAdapter = new AllCryptoAdapter(AllCryptos.this, cryptoList.getListCDP());
+                // Connect the adapter with the RecyclerView.
+                mRecyclerView.setAdapter(mAdapter);
             }
         });
     }
