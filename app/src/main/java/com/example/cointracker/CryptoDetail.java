@@ -40,7 +40,6 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         cryptoList = ListOfCrypto.getInstance();
-        cryptoList.registerListener(this);
         //cryptoDetailArray = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
         arrayPosition = (int)getIntent().getDoubleExtra("id", -1) - 1;
