@@ -53,6 +53,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
             i.putExtra("rank", idClicked);
             v.getContext().startActivity(i);
 
+
         }
     }
 

@@ -7,6 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -53,9 +55,24 @@ public class Transaction extends AppCompatActivity {
 
         id = cryptoList.getListCDP()[arrayPosition].id;
 
-        quantityPurchased = 20; //just for testing. should get value from textedit/user input
+        TextView name = findViewById(R.id.crypto_name);
+        name.setText(cryptoList.getListCDP()[arrayPosition].name);
+
+        EditText et_quantityPurchased = findViewById(R.id.quantity_purchased);
+        String string_quantityPurchased = et_quantityPurchased.getText().toString();
+        quantityPurchased = Double.parseDouble(string_quantityPurchased);
+
+        EditText et_amountExchanged = findViewById(R.id.amount_exchanged);
+        String string_amountExchanged = et_amountExchanged.getText().toString();
+        amountExchanged = Double.parseDouble(string_amountExchanged);
+
+
+        //quantityPurchased = 20; //just for testing. should get value from textedit/user input
         amountExchanged = 100;
         pricePerCoin = amountExchanged/quantityPurchased;
+
+        TextView tv_pricePerCoin = findViewById(R.id.price_per_coin);
+        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
 
 
         // read portfolio file from internal storage
