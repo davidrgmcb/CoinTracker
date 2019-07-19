@@ -89,7 +89,7 @@ public class Transaction extends AppCompatActivity {
 
 
 
-    void saveTransaction(){
+    public void saveTransaction(View v){
 
         EditText et_quantityPurchased = findViewById(R.id.quantity_purchased);
         String string_quantityPurchased = et_quantityPurchased.getText().toString();
