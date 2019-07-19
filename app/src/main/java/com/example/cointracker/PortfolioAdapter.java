@@ -65,9 +65,9 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
     //private CryptoDataPoints[] cryptoList;
     private List<CryptoDataPoints> cryptoList = new ArrayList<>();
     private LayoutInflater mInflator;
-
-    public PortfolioAdapter(Portfolio.CryptoTask context, List<CryptoDataPoints> cryptoList){
-        //mInflator = (LayoutInflater) LayoutInflater.from(context);///////////////////////////////this was getting an error
+    //Context context;
+    public PortfolioAdapter(Context context, List<CryptoDataPoints> cryptoList){
+        mInflator = (LayoutInflater) LayoutInflater.from(context);///////////////////////////////this was getting an error
         this.cryptoList = cryptoList;
     }
 

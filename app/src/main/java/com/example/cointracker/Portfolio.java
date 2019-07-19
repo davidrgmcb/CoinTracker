@@ -88,18 +88,19 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
             buffer.append(line + "\n");
         }
         String text = buffer.toString();
-        System.out.println("*** portfolio file read: "+text);
+        System.out.println("*** portfolio file read: " + text);
 
         Type portfolioType = new TypeToken<ArrayList<Transaction.PortfolioData>>(){}.getType();
 
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
         System.out.println("*** json parsed");
+        System.out.println("***  " + portfolioDataEntries.get(0).id);
 
-        String listOfIds = null;
+        String listOfIds = "";
         for (Transaction.PortfolioData entry : portfolioDataEntries){
             listOfIds += entry.id + ",";
         }
-
+        System.out.println("*** " + listOfIds);
         new CryptoTask(listOfIds).execute();
 
     }
@@ -112,7 +113,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
             this.listOfIds = listOfIds;
         }
 
-        String portfolioApiData = null;
+        String portfolioApiData;
 
         @Override
         protected String doInBackground(Void... voids) {
@@ -120,13 +121,14 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
             OkHttpClient client = new OkHttpClient();
             //https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Clitecoin%2Cripple&order=market_cap_desc&page=1&sparkline=false
             String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=" + listOfIds;
+            System.out.println("*** calling: " + url);
             Request request = new Request.Builder()
                     .url(url)
                     .build();
 
             try (Response response = client.newCall(request).execute()) {
                 portfolioApiData = response.body().string();
-                System.out.println("*** " + portfolioApiData);
+                System.out.println("*** response: " + portfolioApiData);
 
 
                 return portfolioApiData;
@@ -144,11 +146,11 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
             // Get a handle to the RecyclerView.
             mRecyclerView = findViewById(R.id.recyclerview10);//////////////////////probably need to change this id
             // Create an adapter and supply the data to be displayed.
-            mAdapter = new PortfolioAdapter(this, cryptoDataPoints);
+            mAdapter = new PortfolioAdapter(Portfolio.this, cryptoDataPoints);
             // Connect the adapter with the RecyclerView.
             mRecyclerView.setAdapter(mAdapter);
             // Give the RecyclerView a default layout manager.
-            //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));////////////////this was getting an error
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(Portfolio.this));////////////////this was getting an error
         }
 
 
@@ -172,7 +174,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //mAdapter = new PortfolioAdapter(Portfolio.this, cryptoList.getListCDP());/////////////this was getting an error
+                //mAdapter = new PortfolioAdapter(Portfolio.CryptoTask.this, cryptoList.getListCDP());/////////////this was getting an error
                 // Connect the adapter with the RecyclerView.
                 mRecyclerView.setAdapter(mAdapter);
             }
