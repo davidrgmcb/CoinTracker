@@ -10,11 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -34,8 +29,9 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
 
     private ListOfCrypto cryptoList = null;
     private RecyclerView mRecyclerView;
-    private AllCryptoAdapter mAdapter;
+    private PortfolioAdapter mAdapter;
     List<Transaction.PortfolioData> portfolioDataEntries = new ArrayList<>();
+    List<CryptoDataPoints> cryptoDataPoints = new ArrayList<>();
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -99,62 +95,60 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
         System.out.println("*** json parsed");
 
+        String listOfIds = null;
+        for (Transaction.PortfolioData entry : portfolioDataEntries){
+            listOfIds += entry.id + ",";
+        }
 
+        new CryptoTask(listOfIds).execute();
 
     }
 
 
     class CryptoTask extends AsyncTask<Void,Void,String> {
-        //https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Clitecoin%2Cripple&order=market_cap_desc&page=1&sparkline=false
-        String _id;
-        String _currency;
-        int _days;
-        CryptoTask(String id, String currency, int days) {
-            _id = id;
-            _currency = currency;
-            _days = days;
+
+        String listOfIds;
+        CryptoTask(String listOfIds) {
+            this.listOfIds = listOfIds;
         }
 
-        String chartData = null;
+        String portfolioApiData = null;
 
         @Override
         protected String doInBackground(Void... voids) {
             //using square OkHttp library for api callouts
             OkHttpClient client = new OkHttpClient();
-
-            //example call: https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180
-            String url = "https://api.coingecko.com/api/v3/coins/" + _id +
-                    "/market_chart?vs_currency=" + _currency + "&days=" + _days;
+            //https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Clitecoin%2Cripple&order=market_cap_desc&page=1&sparkline=false
+            String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=" + listOfIds;
             Request request = new Request.Builder()
                     .url(url)
                     .build();
 
             try (Response response = client.newCall(request).execute()) {
-                chartData = response.body().string();
-                System.out.println("*** " + chartData);
-                return chartData;
+                portfolioApiData = response.body().string();
+                System.out.println("*** " + portfolioApiData);
+
+
+                return portfolioApiData;
             } catch (IOException e) {
                 return "error";
             }
         }
 
         @Override
-        protected void onPostExecute(String chartData) {
-            //chart historical crypto data
-            CryptoDetail.MarketChartDataPoints marketData = new Gson().fromJson(chartData, CryptoDetail.MarketChartDataPoints.class);
-            LineChart chart = findViewById(R.id.chart);
-            XAxis xAxis = chart.getXAxis();
-            xAxis.setDrawLabels(false);
-            //map data from MarketChartDataPoints to objects for chart
-            List<Entry> entries = new ArrayList<Entry>();
-            for (double[] data : marketData.prices) {
-                // turn your data into Entry objects
-                entries.add(new Entry((float)data[0], (float)data[1] ));
-            }
-            LineDataSet dataSet = new LineDataSet(entries, "Price - USD");
-            LineData lineData = new LineData(dataSet);
-            chart.setData(lineData);
-            chart.invalidate(); // refresh
+        protected void onPostExecute(String portfolioApiData) {
+
+            Type cdpType = new TypeToken<ArrayList<CryptoDataPoints>>(){}.getType();
+            cryptoDataPoints = new Gson().fromJson(portfolioApiData, cdpType);
+
+            // Get a handle to the RecyclerView.
+            mRecyclerView = findViewById(R.id.recyclerview10);//////////////////////probably need to change this id
+            // Create an adapter and supply the data to be displayed.
+            mAdapter = new PortfolioAdapter(this, cryptoDataPoints);
+            // Connect the adapter with the RecyclerView.
+            mRecyclerView.setAdapter(mAdapter);
+            // Give the RecyclerView a default layout manager.
+            //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));////////////////this was getting an error
         }
 
 
@@ -178,7 +172,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mAdapter = new AllCryptoAdapter(Portfolio.this, cryptoList.getListCDP());
+                //mAdapter = new PortfolioAdapter(Portfolio.this, cryptoList.getListCDP());/////////////this was getting an error
                 // Connect the adapter with the RecyclerView.
                 mRecyclerView.setAdapter(mAdapter);
             }

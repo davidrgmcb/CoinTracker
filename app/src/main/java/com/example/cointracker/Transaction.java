@@ -35,7 +35,7 @@ public class Transaction extends AppCompatActivity {
     double amountExchanged;
     List<PortfolioData> portfolioDataEntries = new ArrayList<>();
 
-    class PortfolioData{
+    public class PortfolioData{
         String id;
         double totalQuantityOwned;
         double weightedAveragePriceUSD;
