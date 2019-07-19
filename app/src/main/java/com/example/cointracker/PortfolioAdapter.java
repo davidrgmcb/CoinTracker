@@ -15,9 +15,6 @@ import java.util.List;
 
 public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.PortfolioViewHolder>{
 
-//public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.CryptoViewHolder> {
-
-
     class PortfolioViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         final PortfolioAdapter mAdapter;
         TextView cryptoName;
@@ -27,17 +24,20 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
         TextView rank;
         TextView ath;
         TextView athChange;
-
+        TextView quantityOwned;
+        TextView currentValue;
 
         public PortfolioViewHolder(View itemView, PortfolioAdapter adapter){
             super(itemView);
             cryptoName = itemView.findViewById(R.id.cryptoName);
             currentPrice = itemView.findViewById(R.id.currentPrice);
             percentageChange = itemView.findViewById(R.id.percentageChange);
-            ath = itemView.findViewById(R.id.allTimeHigh);
+            ath = itemView.findViewById(R.id.quantity_owned);
             rank = itemView.findViewById(R.id.rank);
             athChange = itemView.findViewById(R.id.ath_change);
             ticker = itemView.findViewById(R.id.symbol);
+            quantityOwned = itemView.findViewById(R.id.quantity_owned);
+            currentValue = itemView.findViewById(R.id.current_value);
 
             this.mAdapter = adapter;
             itemView.setOnClickListener(this);
@@ -74,7 +74,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
     @NonNull
     @Override
     public PortfolioAdapter.PortfolioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflator.inflate(R.layout.cryptolistitem,parent,false);
+        View mItemView = mInflator.inflate(R.layout.portfolio_list_item,parent,false);
         return new PortfolioViewHolder(mItemView, this);
     }
 
@@ -83,9 +83,11 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
         CryptoDataPoints currentItem = cryptoList.get(position);//[position];
         holder.cryptoName.setText(currentItem.name);
         holder.ticker.setText(currentItem.symbol);
-        holder.rank.setText((int)currentItem.market_cap_rank + ".");
+        //holder.rank.setText((int)currentItem.market_cap_rank + ".");
+        holder.currentValue.setText("$" + String.format("%.2f", currentItem.currentValue));
+        holder.quantityOwned.setText(Double.toString(currentItem.totalQuantityOwned));
 
-        holder.currentPrice.setText("$"+currentItem.current_price);
+        holder.currentPrice.setText("$" + currentItem.current_price);
         holder.percentageChange.setText(String.format("%.2f", currentItem.price_change_percentage_24h) + "%");
         //conditional formatting of price/ percentage change
         if (currentItem.price_change_percentage_24h < -1) {
@@ -96,7 +98,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
             holder.percentageChange.setTextColor(Color.parseColor("#2e7d32"));
         }
 
-        holder.ath.setText("$"+ currentItem.ath);
+        //holder.ath.setText("$" + currentItem.ath);
         holder.athChange.setText(String.format("%.2f", currentItem.ath_change_percentage) + "%");
 
     }

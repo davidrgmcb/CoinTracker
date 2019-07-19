@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,31 +33,8 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
     private PortfolioAdapter mAdapter;
     List<Transaction.PortfolioData> portfolioDataEntries = new ArrayList<>();
     List<CryptoDataPoints> cryptoDataPoints = new ArrayList<>();
+    double totalPortfolioValue;
 
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Intent myIntent;
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    myIntent = new Intent(Portfolio.this, MainActivity.class);
-                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(myIntent);
-                    return true;
-                case R.id.navigation_portfolio:
-                    return true;
-                case R.id.navigation_all_crypto:
-                    myIntent = new Intent(Portfolio.this, AllCryptos.class);
-                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(myIntent);
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +97,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         protected String doInBackground(Void... voids) {
             //using square OkHttp library for api callouts
             OkHttpClient client = new OkHttpClient();
-            //https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Clitecoin%2Cripple&order=market_cap_desc&page=1&sparkline=false
+            //https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Clitecoin%2Cripple
             String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=" + listOfIds;
             System.out.println("*** calling: " + url);
             Request request = new Request.Builder()
@@ -129,8 +107,6 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
             try (Response response = client.newCall(request).execute()) {
                 portfolioApiData = response.body().string();
                 System.out.println("*** response: " + portfolioApiData);
-
-
                 return portfolioApiData;
             } catch (IOException e) {
                 return "error";
@@ -143,14 +119,28 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
             Type cdpType = new TypeToken<ArrayList<CryptoDataPoints>>(){}.getType();
             cryptoDataPoints = new Gson().fromJson(portfolioApiData, cdpType);
 
+            //merge portfolio data into cryptoDataPoints to display in recycler view
+            for (Transaction.PortfolioData entry : portfolioDataEntries){
+                for (CryptoDataPoints crypto: cryptoDataPoints){
+                    if (crypto.id.equals(entry.id)){
+                        crypto.totalQuantityOwned = entry.totalQuantityOwned;
+                        crypto.weightedAveragePriceUSD = entry.weightedAveragePriceUSD;
+                        crypto.currentValue = crypto.totalQuantityOwned * crypto.current_price;
+                        totalPortfolioValue += crypto.currentValue;
+                    }
+                }
+            }
+            TextView tv_totalPortfolioValue = findViewById(R.id.total_portfolio_value);
+            tv_totalPortfolioValue.setText("$" + String.format("%.2f",totalPortfolioValue));
+
             // Get a handle to the RecyclerView.
-            mRecyclerView = findViewById(R.id.recyclerview10);//////////////////////probably need to change this id
+            mRecyclerView = findViewById(R.id.recyclerview10);//////////////////////probably should change this id
             // Create an adapter and supply the data to be displayed.
             mAdapter = new PortfolioAdapter(Portfolio.this, cryptoDataPoints);
             // Connect the adapter with the RecyclerView.
             mRecyclerView.setAdapter(mAdapter);
             // Give the RecyclerView a default layout manager.
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(Portfolio.this));////////////////this was getting an error
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(Portfolio.this));
         }
 
 
@@ -174,12 +164,36 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //mAdapter = new PortfolioAdapter(Portfolio.CryptoTask.this, cryptoList.getListCDP());/////////////this was getting an error
+                mAdapter = new PortfolioAdapter(Portfolio.this, cryptoList.getListCDP());/////////////this was getting an error
                 // Connect the adapter with the RecyclerView.
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent myIntent;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    myIntent = new Intent(Portfolio.this, MainActivity.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(myIntent);
+                    return true;
+                case R.id.navigation_portfolio:
+                    return true;
+                case R.id.navigation_all_crypto:
+                    myIntent = new Intent(Portfolio.this, AllCryptos.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(myIntent);
+                    return true;
+            }
+            return false;
+        }
+    };
 }
 
 

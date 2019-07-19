@@ -34,7 +34,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
             cryptoName = itemView.findViewById(R.id.cryptoName);
             currentPrice = itemView.findViewById(R.id.currentPrice);
             percentageChange = itemView.findViewById(R.id.percentageChange);
-            ath = itemView.findViewById(R.id.allTimeHigh);
+            ath = itemView.findViewById(R.id.quantity_owned);
             rank = itemView.findViewById(R.id.rank);
             athChange = itemView.findViewById(R.id.ath_change);
             ticker = itemView.findViewById(R.id.symbol);

@@ -73,7 +73,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/allTimeHigh"
+        android:id="@+id/quantity_owned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/currentPrice"

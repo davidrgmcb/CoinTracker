@@ -20,7 +20,7 @@ public class CryptoDataPoints {
             current_price,
             market_cap,
             market_cap_rank,
-            total_volume,                       // i.e. 24h volume
+            total_volume,                       // i.e. 24h trading volume
             high_24h,
             low_24h,
             price_change_24h,
@@ -29,6 +29,16 @@ public class CryptoDataPoints {
             market_cap_change_percentage_24h,
             ath,                                // ath == all time high
             ath_change_percentage;
+
+    //more data points for portfolio activity
+    double  totalQuantityOwned,
+            weightedAveragePriceUSD,
+            currentValue, // = totalQuantityOwned * current_price,
+            amountInvested, // = totalQuantityOwned * weightedAveragePriceUSD,
+            valueGainedLost = currentValue - amountInvested,
+            percentGainLoss = current_price / weightedAveragePriceUSD;
+
+
 
 //
 
