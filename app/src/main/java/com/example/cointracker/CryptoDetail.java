@@ -54,18 +54,18 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
         arrayPosition = (int)getIntent().getDoubleExtra("rank", -1) - 1;
 
         TextView name = findViewById(R.id.cryptoName);
-        name.setText(cryptoList.getListCDP()[arrayPosition].name);
+        name.setText(cryptoList.getListCDP().get(arrayPosition).name);//[arrayPosition].name);
 
         TextView currentPrice = findViewById(R.id.currentPrice);
-        currentPrice.setText("$"+cryptoList.getListCDP()[arrayPosition].current_price);
+        currentPrice.setText("$"+cryptoList.getListCDP().get(arrayPosition).current_price);//[arrayPosition].current_price);
 
         TextView priceChanged = findViewById(R.id.priceChange);
-        priceChanged.setText(cryptoList.getListCDP()[arrayPosition].price_change_percentage_24h + "%");
+        priceChanged.setText(cryptoList.getListCDP().get(arrayPosition).price_change_percentage_24h + "%");//[arrayPosition].price_change_percentage_24h + "%");
 
-        id = cryptoList.getListCDP()[arrayPosition].id;
+        id = cryptoList.getListCDP().get(arrayPosition).id;//[arrayPosition].id;
 
         //load crypto image
-        new DownloadImageTask((ImageView) findViewById(R.id.cryptoLogo)).execute(cryptoList.getListCDP()[arrayPosition].image);
+        new DownloadImageTask((ImageView) findViewById(R.id.cryptoLogo)).execute(cryptoList.getListCDP().get(arrayPosition).image);//[arrayPosition].image);
 
         String currency = "usd";
         int days = 180;

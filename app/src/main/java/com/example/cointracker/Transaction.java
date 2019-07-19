@@ -25,7 +25,8 @@ import java.util.List;
 public class Transaction extends AppCompatActivity {
 
     private ListOfCrypto cryptoList = null;
-    CryptoDataPoints cryptoDetailArray[];
+    //CryptoDataPoints cryptoDetailArray[];
+    List<CryptoDataPoints> listCDP = new ArrayList<>();
     int arrayPosition;
 
     String id;
@@ -49,14 +50,14 @@ public class Transaction extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         cryptoList = cryptoList.getInstance();
-        cryptoDetailArray = cryptoList.getListCDP();
+        listCDP = cryptoList.getListCDP();
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
         arrayPosition = getIntent().getIntExtra("arrayPosition", -1) ;
 
-        id = cryptoList.getListCDP()[arrayPosition].id;
+        id = cryptoList.getListCDP().get(arrayPosition).id;//[arrayPosition].id;
 
         TextView name = findViewById(R.id.crypto_name);
-        name.setText(cryptoList.getListCDP()[arrayPosition].name);
+        name.setText(cryptoList.getListCDP().get(arrayPosition).name);//[arrayPosition].name);
 
         // read portfolio file from internal storage
         BufferedReader input = null;

@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.CryptoViewHolder> {
 
@@ -47,7 +50,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
             // Use that to access the affected item in cryptoList.
-            double idClicked = cryptoList[mPosition].market_cap_rank; //get(mPosition);
+            double idClicked = cryptoList.get(mPosition).market_cap_rank; //[mPosition].market_cap_rank; //get(mPosition);
 
             Intent i = new Intent(v.getContext(), CryptoDetail.class);
             i.putExtra("rank", idClicked);
@@ -59,10 +62,11 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
 
 
     //dataset to be displayed
-    private CryptoDataPoints[] cryptoList;
+    //private CryptoDataPoints[] cryptoList;
+    private List<CryptoDataPoints> cryptoList = new ArrayList<>();
     private LayoutInflater mInflator;
 
-    public AllCryptoAdapter(Context context, CryptoDataPoints[] cryptoList){
+    public AllCryptoAdapter(Context context, List<CryptoDataPoints> cryptoList){
         mInflator = LayoutInflater.from(context);
         this.cryptoList = cryptoList;
     }
@@ -76,7 +80,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
 
     @Override
     public void onBindViewHolder(@NonNull AllCryptoAdapter.CryptoViewHolder holder, int position) {
-        CryptoDataPoints currentItem = cryptoList[position];
+        CryptoDataPoints currentItem = cryptoList.get(position);//[position];
         holder.cryptoName.setText(currentItem.name);
         holder.ticker.setText(currentItem.symbol);
         holder.rank.setText((int)currentItem.market_cap_rank + ".");
@@ -99,7 +103,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
 
     @Override
     public int getItemCount() {
-        return cryptoList.length;
+        return cryptoList.size();//length; //was length when array, but changed to list
     }
 }
 

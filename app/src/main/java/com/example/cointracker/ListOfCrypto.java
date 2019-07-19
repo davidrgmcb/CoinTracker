@@ -1,7 +1,10 @@
 package com.example.cointracker;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,8 @@ public class ListOfCrypto {
     }
 
     private static ListOfCrypto INSTANCE = null;
-    private CryptoDataPoints[] listCDP;
+    //private CryptoDataPoints[] listCDP;
+    List<CryptoDataPoints> listCDP = new ArrayList<>();
 
     public synchronized static ListOfCrypto getInstance() {
         if (INSTANCE == null) {
@@ -34,13 +38,21 @@ public class ListOfCrypto {
         return INSTANCE;
     }
 
-    public synchronized CryptoDataPoints[] getListCDP() {
+    //public synchronized CryptoDataPoints[] getListCDP() {
+      //  return listCDP;
+    //}
+    public synchronized List<CryptoDataPoints> getListCDP() {
         return listCDP;
     }
 
-    private synchronized void setListCDP(CryptoDataPoints[] listCDP) {
+
+    //private synchronized void setListCDP(CryptoDataPoints[] listCDP) {
+       // this.listCDP = listCDP;
+    //}
+    private synchronized void setListCDP(List<CryptoDataPoints> listCDP) {
         this.listCDP = listCDP;
     }
+
 
     public synchronized void update(String currency) {
         CryptoTask task = new CryptoTask(currency);
@@ -63,7 +75,9 @@ public class ListOfCrypto {
                 e.printStackTrace();
             }
 //
-            setListCDP(new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class));
+            Type cryptoType = new TypeToken<ArrayList<CryptoDataPoints>>(){}.getType();
+            setListCDP((List<CryptoDataPoints>) new Gson().fromJson(cryptoResponse, cryptoType));
+            //setListCDP(new Gson().fromJson(cryptoResponse, CryptoDataPoints[].class));
             if(mListener != null) {
                 for (Listener l: mListener) {
                     l.updateUI();
