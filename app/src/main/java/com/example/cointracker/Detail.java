@@ -22,9 +22,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +42,9 @@ public class Detail extends AppCompatActivity implements ListOfCrypto.Listener {
     //CryptoDataPoints cryptoDetailArray[];
     int arrayPosition;
     String id;
+    List<Transaction.PortfolioData> portfolioDataEntries = new ArrayList<>();
+    CryptoDataPoints cryptoDetail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,24 +61,61 @@ public class Detail extends AppCompatActivity implements ListOfCrypto.Listener {
         //get the array position of the coin by subtracting 1 from the crypto rank passed in
         arrayPosition = (int)getIntent().getDoubleExtra("rank", -1) - 1;
 
+        cryptoDetail = cryptoList.getListCDP().get(arrayPosition);
+
         TextView name = findViewById(R.id.cryptoName);
-        name.setText(cryptoList.getListCDP().get(arrayPosition).name);//[arrayPosition].name);
+        name.setText(cryptoDetail.name);//[arrayPosition].name);
 
         TextView currentPrice = findViewById(R.id.currentPrice);
-        currentPrice.setText("$"+cryptoList.getListCDP().get(arrayPosition).current_price);//[arrayPosition].current_price);
+        currentPrice.setText("$" + cryptoDetail.current_price);//[arrayPosition].current_price);
 
         TextView priceChanged = findViewById(R.id.priceChange);
-        priceChanged.setText(cryptoList.getListCDP().get(arrayPosition).price_change_percentage_24h + "%");//[arrayPosition].price_change_percentage_24h + "%");
+        priceChanged.setText(cryptoDetail.price_change_percentage_24h + "%");//[arrayPosition].price_change_percentage_24h + "%");
 
-        id = cryptoList.getListCDP().get(arrayPosition).id;//[arrayPosition].id;
+        id = cryptoDetail.id;//[arrayPosition].id;
 
         //load crypto image
-        new DownloadImageTask((ImageView) findViewById(R.id.cryptoLogo)).execute(cryptoList.getListCDP().get(arrayPosition).image);//[arrayPosition].image);
+        new DownloadImageTask((ImageView) findViewById(R.id.cryptoLogo)).execute(cryptoDetail.image);//[arrayPosition].image);
 
         String currency = "usd";
         int days = 180;
 
         new CryptoTask(id, currency, days).execute();
+
+        // read portfolio file from internal storage
+        BufferedReader input = null;
+        try {
+            input = new BufferedReader(
+                    new InputStreamReader(openFileInput("myPortfolio.txt")));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String line = null;
+        StringBuffer buffer = new StringBuffer();
+        while (true) {
+            try {
+                if (!((line = input.readLine()) != null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            buffer.append(line + "\n");
+        }
+        String text = buffer.toString();
+        System.out.println("*** portfolio file read: " + text);
+
+        Type portfolioType = new TypeToken<ArrayList<Transaction.PortfolioData>>(){}.getType();
+        portfolioDataEntries = new Gson().fromJson(text, portfolioType);
+        System.out.println("*** json parsed");
+
+        //merge portfolio data into cryptoDetail to display on activity
+        for (Transaction.PortfolioData entry : portfolioDataEntries){
+            if (entry.id.equals(cryptoDetail.id)){
+                cryptoDetail.totalQuantityOwned = entry.totalQuantityOwned;
+                cryptoDetail.weightedAveragePriceUSD = entry.weightedAveragePriceUSD;
+                cryptoDetail.currentValue = cryptoDetail.totalQuantityOwned * cryptoDetail.current_price;
+            }
+        }
+
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
         fab.setOnClickListener(new View.OnClickListener() {
