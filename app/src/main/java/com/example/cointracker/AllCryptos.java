@@ -16,31 +16,6 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
     private AllCryptoAdapter mAdapter;
 
 
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Intent myIntent;
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    myIntent = new Intent(AllCryptos.this, MainActivity.class);
-                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(myIntent);
-                    return true;
-                case R.id.navigation_portfolio:
-                    myIntent = new Intent(AllCryptos.this, Portfolio.class);
-                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivity(myIntent);
-                    return true;
-                case R.id.navigation_all_crypto:
-                    return true;
-            }
-            return false;
-        }
-    };
-
 //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,4 +62,29 @@ public class AllCryptos extends AppCompatActivity implements ListOfCrypto.Listen
             }
         });
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Intent myIntent;
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    myIntent = new Intent(AllCryptos.this, MainActivity.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(myIntent);
+                    return true;
+                case R.id.navigation_portfolio:
+                    myIntent = new Intent(AllCryptos.this, Portfolio.class);
+                    myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(myIntent);
+                    return true;
+                case R.id.navigation_all_crypto:
+                    return true;
+            }
+            return false;
+        }
+    };
+
 }

@@ -22,8 +22,8 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
         TextView currentPrice;
         TextView percentageChange;
         TextView rank;
-        TextView ath;
-        TextView athChange;
+        //TextView ath;
+        //TextView athChange;
         TextView quantityOwned;
         TextView currentValue;
 
@@ -32,9 +32,9 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
             cryptoName = itemView.findViewById(R.id.cryptoName);
             currentPrice = itemView.findViewById(R.id.currentPrice);
             percentageChange = itemView.findViewById(R.id.percentageChange);
-            ath = itemView.findViewById(R.id.quantity_owned);
+            //ath = itemView.findViewById(R.id.quantity_owned);
             rank = itemView.findViewById(R.id.rank);
-            athChange = itemView.findViewById(R.id.ath_change);
+            //athChange = itemView.findViewById(R.id.ath_change);
             ticker = itemView.findViewById(R.id.symbol);
             quantityOwned = itemView.findViewById(R.id.quantity_owned);
             currentValue = itemView.findViewById(R.id.current_value);
@@ -99,7 +99,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
         }
 
         //holder.ath.setText("$" + currentItem.ath);
-        holder.athChange.setText(String.format("%.2f", currentItem.ath_change_percentage) + "%");
+        //holder.athChange.setText(String.format("%.2f", currentItem.ath_change_percentage) + "%");
 
     }
 

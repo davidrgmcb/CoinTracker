@@ -26,23 +26,23 @@
         android:id="@+id/quantity_purchased"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
         android:ems="10"
-        android:hint="Quantity Purchased"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_weighted_avg_price" />
+        android:hint="Quantity Exchanged"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1" />
 
     <EditText
         android:id="@+id/amount_exchanged"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
         android:ems="10"
         android:hint="Amount Exchanged"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantity_purchased" />
 
@@ -51,60 +51,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
-        android:text="Enter details below to log a purchase to your portfolio"
+        android:text="Enter details below to log a transaction to your portfolio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
 
     <TextView
-        android:id="@+id/crypto_name"
+        android:id="@+id/symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="crypto name"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:layout_editor_absoluteX="42dp" />
+        android:layout_marginEnd="24dp"
+        android:text="ticker"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity_purchased"
+        app:layout_constraintEnd_toStartOf="@+id/quantity_purchased" />
 
     <TextView
         android:id="@+id/price_per_coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
         android:text="price per coin"
-        app:layout_constraintTop_toBottomOf="@+id/quantity_purchased"
-        tools:layout_editor_absoluteX="42dp" />
-
-    <TextView
-        android:id="@+id/current_holdings"
-        android:layout_width="128dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:text="current holdings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/current_weighted_avg_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="current weighted average price"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/crypto_name" />
+        app:layout_constraintTop_toBottomOf="@+id/amount_exchanged" />
 
     <Button
         android:id="@+id/save_transaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="48dp"
         android:onClick="saveTransaction"
         android:text="Update Portfolio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount_exchanged" />
+        app:layout_constraintTop_toBottomOf="@+id/price_per_coin" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="USD"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintBottom_toBottomOf="@+id/amount_exchanged"
+        app:layout_constraintEnd_toStartOf="@+id/amount_exchanged" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:switchTextAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:text="Buy / Sell"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
 </android.support.constraint.ConstraintLayout>

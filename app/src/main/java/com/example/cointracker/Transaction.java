@@ -3,8 +3,6 @@ package com.example.cointracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -52,13 +50,13 @@ public class Transaction extends AppCompatActivity {
 
         cryptoList = cryptoList.getInstance();
         listCDP = cryptoList.getListCDP();
-        //get the array position of the coin by subtracting 1 from the crypto rank passed in
+        //get the array position of the coin from the intent
         arrayPosition = getIntent().getIntExtra("arrayPosition", -1) ;
 
-        id = cryptoList.getListCDP().get(arrayPosition).id;//[arrayPosition].id;
+        id = cryptoList.getListCDP().get(arrayPosition).id;
 
-        TextView name = findViewById(R.id.crypto_name);
-        name.setText(cryptoList.getListCDP().get(arrayPosition).name);//[arrayPosition].name);
+        TextView symbol = findViewById(R.id.symbol);
+        symbol.setText(cryptoList.getListCDP().get(arrayPosition).symbol);
 
         // read portfolio file from internal storage
         BufferedReader input = null;
