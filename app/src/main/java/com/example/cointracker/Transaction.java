@@ -79,7 +79,7 @@ public class Transaction extends AppCompatActivity {
             buffer.append(line + "\n");
         }
         String text = buffer.toString();
-        System.out.println("*** portfolio file read: "+text);
+        System.out.println("*** portfolio file read: " + text);
 
         Type portfolioType = new TypeToken<ArrayList<PortfolioData>>(){}.getType();
 

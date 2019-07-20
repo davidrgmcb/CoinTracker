@@ -69,10 +69,8 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         System.out.println("*** portfolio file read: " + text);
 
         Type portfolioType = new TypeToken<ArrayList<Transaction.PortfolioData>>(){}.getType();
-
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
         System.out.println("*** json parsed");
-        System.out.println("***  " + portfolioDataEntries.get(0).id);
 
         String listOfIds = "";
         for (Transaction.PortfolioData entry : portfolioDataEntries){
@@ -164,7 +162,7 @@ public class Portfolio extends AppCompatActivity implements ListOfCrypto.Listene
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mAdapter = new PortfolioAdapter(Portfolio.this, cryptoList.getListCDP());/////////////this was getting an error
+                mAdapter = new PortfolioAdapter(Portfolio.this, cryptoList.getListCDP());
                 // Connect the adapter with the RecyclerView.
                 mRecyclerView.setAdapter(mAdapter);
             }

@@ -74,7 +74,7 @@ public class AllCryptoAdapter extends RecyclerView.Adapter<AllCryptoAdapter.Cryp
     @NonNull
     @Override
     public AllCryptoAdapter.CryptoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflator.inflate(R.layout.cryptolistitem,parent,false);
+        View mItemView = mInflator.inflate(R.layout.crypto_list_item,parent,false);
         return new CryptoViewHolder(mItemView, this);
     }
 
