@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
 
         cryptoList.update("USD");
         //go to crypto detail activity
-        //Intent myIntent = new Intent(MainActivity.this, CryptoDetail.class);
+        //Intent myIntent = new Intent(MainActivity.this, Detail.class);
         //MainActivity.this.startActivity(myIntent);
     }
     static int count = 0;

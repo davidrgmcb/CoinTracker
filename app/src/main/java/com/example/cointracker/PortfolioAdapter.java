@@ -52,7 +52,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.Port
             // Use that to access the affected item in cryptoList.
             double idClicked = cryptoList.get(mPosition).market_cap_rank; //[mPosition].market_cap_rank; //get(mPosition);
 
-            Intent i = new Intent(v.getContext(), CryptoDetail.class);
+            Intent i = new Intent(v.getContext(), Detail.class);
             i.putExtra("rank", idClicked);
             v.getContext().startActivity(i);
 

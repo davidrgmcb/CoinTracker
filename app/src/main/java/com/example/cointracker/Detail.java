@@ -32,7 +32,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.Listener {
+public class Detail extends AppCompatActivity implements ListOfCrypto.Listener {
     private ListOfCrypto cryptoList = null;
     //CryptoDataPoints cryptoDetailArray[];
     int arrayPosition;
@@ -40,7 +40,7 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("*** CryptoDetail onCreate running...");
+        System.out.println("*** Detail onCreate running...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crypto_detail);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -72,12 +72,12 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
 
         new CryptoTask(id, currency, days).execute();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                  //      .setAction("Action", null).show();
 
                 Intent i = new Intent(view.getContext(), Transaction.class);
                 i.putExtra("arrayPosition", arrayPosition);
@@ -199,17 +199,17 @@ public class CryptoDetail extends AppCompatActivity implements ListOfCrypto.List
             Intent myIntent;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    myIntent = new Intent(CryptoDetail.this, MainActivity.class);
+                    myIntent = new Intent(Detail.this, MainActivity.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_portfolio:
-                    myIntent = new Intent(CryptoDetail.this, Portfolio.class);
+                    myIntent = new Intent(Detail.this, Portfolio.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;
                 case R.id.navigation_all_crypto:
-                    myIntent = new Intent(CryptoDetail.this, AllCryptos.class);
+                    myIntent = new Intent(Detail.this, AllCryptos.class);
                     myIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                     startActivity(myIntent);
                     return true;

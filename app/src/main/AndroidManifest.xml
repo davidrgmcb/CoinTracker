@@ -17,7 +17,7 @@
             android:label="@string/title_activity_transaction"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".CryptoDetail"
+            android:name=".Detail"
             android:label="@string/title_activity_crypto_detail" />
         <activity
             android:name=".Portfolio"
