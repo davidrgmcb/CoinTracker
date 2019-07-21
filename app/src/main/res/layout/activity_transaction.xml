@@ -26,11 +26,11 @@
         android:id="@+id/quantity_purchased"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
         android:ems="10"
         android:hint="Quantity Exchanged"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch1" />
 
@@ -38,11 +38,11 @@
         android:id="@+id/amount_exchanged"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:ems="10"
         android:hint="Amount Exchanged"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantity_purchased" />
 
@@ -70,18 +70,17 @@
         android:id="@+id/price_per_coin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="24dp"
         android:text="price per coin"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/amount_exchanged"
         app:layout_constraintTop_toBottomOf="@+id/amount_exchanged" />
 
     <Button
         android:id="@+id/save_transaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:onClick="saveTransaction"
         android:text="Update Portfolio"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +102,7 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:switchTextAppearance="@style/TextAppearance.AppCompat.Display1"
         android:text="Buy / Sell"
         app:layout_constraintEnd_toEndOf="parent"

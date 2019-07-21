@@ -27,6 +27,9 @@ public class Transaction extends AppCompatActivity {
     //CryptoDataPoints cryptoDetailArray[];
     List<CryptoDataPoints> listCDP = new ArrayList<>();
     int arrayPosition;
+    EditText et_quantityPurchased;
+    EditText et_amountExchanged;
+    TextView tv_pricePerCoin;
 
     String id;
     double quantityPurchased;
@@ -84,28 +87,43 @@ public class Transaction extends AppCompatActivity {
         portfolioDataEntries = new Gson().fromJson(text, portfolioType);
         System.out.println("*** json parsed");
 
+        tv_pricePerCoin = findViewById(R.id.price_per_coin);
+        et_quantityPurchased = findViewById(R.id.quantity_purchased);
+        et_quantityPurchased.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && et_quantityPurchased.getText().toString() != ""){
+                    String string_quantityPurchased = et_quantityPurchased.getText().toString();
+                    quantityPurchased = Double.parseDouble(string_quantityPurchased);
+                    if (amountExchanged != 0 && quantityPurchased != 0){
+                        pricePerCoin = amountExchanged/quantityPurchased;
+                        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
+                    }
+                }
+            }
+        });
+        et_amountExchanged = findViewById(R.id.amount_exchanged);
+        et_amountExchanged.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && et_amountExchanged.getText().toString() != ""){
+                    String string_amountExchanged = et_amountExchanged.getText().toString();
+                    amountExchanged = Double.parseDouble(string_amountExchanged);
+                    if (amountExchanged != 0 && quantityPurchased != 0){
+                        pricePerCoin = amountExchanged/quantityPurchased;
+                        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
+                    }
+
+                }
+            }
+        });
+
+
     }
 
 
 
     public void saveTransaction(View v){
-
-        EditText et_quantityPurchased = findViewById(R.id.quantity_purchased);
-        String string_quantityPurchased = et_quantityPurchased.getText().toString();
-        quantityPurchased = Double.parseDouble(string_quantityPurchased);
-
-        EditText et_amountExchanged = findViewById(R.id.amount_exchanged);
-        String string_amountExchanged = et_amountExchanged.getText().toString();
-        amountExchanged = Double.parseDouble(string_amountExchanged);
-
-
-        //quantityPurchased = 20; //just for testing. should get value from textedit/user input
-        //amountExchanged = 100;
-        pricePerCoin = amountExchanged/quantityPurchased;
-
-        TextView tv_pricePerCoin = findViewById(R.id.price_per_coin);
-        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
-
 
         boolean coinFound = false;
         if (portfolioDataEntries.isEmpty()){
