@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
     {
         public int compare(CryptoDataPoints a, CryptoDataPoints b)
         {
-            return (int)(a.price_change_percentage_24h - b.price_change_percentage_24h);
+            return (int)(b.price_change_percentage_24h - a.price_change_percentage_24h);
         }
     }
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
     {
         public int compare(CryptoDataPoints a, CryptoDataPoints b)
         {
-            return (int)(b.price_change_percentage_24h - a.price_change_percentage_24h);
+            return (int)(a.price_change_percentage_24h - b.price_change_percentage_24h);
         }
     }
 
@@ -113,20 +113,20 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
             public void run() {
                 sortList = new ArrayList<>(cryptoList.getListCDP());
                 Collections.sort(sortList, new SortByGain());
-                List<CryptoDataPoints> temp = new ArrayList<>();
+                List<CryptoDataPoints> gain = new ArrayList<>();
                 for (int i = 0; i < 3; i++)
                 {
-                    temp.add(sortList.get(i));
+                    gain.add(sortList.get(i));
                 }
-                ArrayAdapter gainAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, temp);
+                ArrayAdapter gainAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, gain);
                 gainList.setAdapter(gainAdapter);
                 Collections.sort(sortList, new SortByLoss());
-                temp.clear();
+                List<CryptoDataPoints> loss = new ArrayList<>();
                 for (int i = 0; i < 3; i++)
                 {
-                    temp.add(sortList.get(i));
+                    loss.add(sortList.get(i));
                 }
-                ArrayAdapter lossAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, temp);
+                ArrayAdapter lossAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, loss);
                 lossList.setAdapter(lossAdapter);
             }
         });
