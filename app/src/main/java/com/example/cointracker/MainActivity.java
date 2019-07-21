@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +24,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements ListOfCrypto.Listener{
     private ListOfCrypto cryptoList = null;
     public String portfolioFilename = "myPortfolio.txt";
-    private List<CryptoDataPoints> sortList = null;
+    private List<CryptoDataPoints> sortGain = null;
+    private List<CryptoDataPoints> sortLoss = null;
     ListView gainList;
     ListView lossList;
 
@@ -54,6 +56,34 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
+
+        gainList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // Use that to access the affected item in cryptoList.
+                double idClicked = sortGain.get(position).market_cap_rank;
+
+                Intent i = new Intent(view.getContext(), Detail.class);
+                i.putExtra("rank", idClicked);
+                view.getContext().startActivity(i);
+            }
+        });
+
+        lossList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // Use that to access the affected item in cryptoList.
+                double idClicked = sortLoss.get(position).market_cap_rank;
+
+                Intent i = new Intent(view.getContext(), Detail.class);
+                i.putExtra("rank", idClicked);
+                view.getContext().startActivity(i);
+            }
+        });
 
         //check if portfolio file exists, if not, create it
         File file = new File(getFilesDir()+"/"+portfolioFilename);
@@ -112,20 +142,21 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                sortList = new ArrayList<>(cryptoList.getListCDP());
-                Collections.sort(sortList, new SortByGain());
+                sortGain = new ArrayList<>(cryptoList.getListCDP());
+                sortLoss = new ArrayList<>(cryptoList.getListCDP());
+                Collections.sort(sortGain, new SortByGain());
                 List<CryptoDataPoints> gain = new ArrayList<>();
                 for (int i = 0; i < 3; i++)
                 {
-                    gain.add(sortList.get(i));
+                    gain.add(sortGain.get(i));
                 }
                 ArrayAdapter gainAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, gain);
                 gainList.setAdapter(gainAdapter);
-                Collections.sort(sortList, new SortByLoss());
+                Collections.sort(sortLoss, new SortByLoss());
                 List<CryptoDataPoints> loss = new ArrayList<>();
                 for (int i = 0; i < 3; i++)
                 {
-                    loss.add(sortList.get(i));
+                    loss.add(sortLoss.get(i));
                 }
                 ArrayAdapter lossAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, loss);
                 lossList.setAdapter(lossAdapter);
