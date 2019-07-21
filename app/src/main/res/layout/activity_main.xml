@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ListView
+        android:id="@+id/gainList"
         android:layout_width="396dp"
         android:layout_height="247dp"
         android:layout_marginTop="8dp"
@@ -50,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <ListView
+        android:id="@+id/lossList"
         android:layout_width="395dp"
         android:layout_height="293dp"
         app:layout_constraintEnd_toEndOf="parent"
