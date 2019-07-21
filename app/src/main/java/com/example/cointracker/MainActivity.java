@@ -143,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
             @Override
             public void run() {
                 sortGain = new ArrayList<>(cryptoList.getListCDP());
+                sortLoss = new ArrayList<>(cryptoList.getListCDP());
                 Collections.sort(sortGain, new SortByGain());
                 List<CryptoDataPoints> gain = new ArrayList<>();
                 for (int i = 0; i < 3; i++)
