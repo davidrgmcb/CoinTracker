@@ -40,6 +40,10 @@ public class CryptoDataPoints {
 
 
 
+    public String toString() {
+        return name + " " + percentGainLoss + " " + current_price;
+    }
+
 //
 
     //coinGecko api is public, no key required
