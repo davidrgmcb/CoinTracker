@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -98,7 +101,7 @@ public class Transaction extends AppCompatActivity {
                     quantityPurchased = Double.parseDouble(string_quantityPurchased);
                     if (amountExchanged != 0 && quantityPurchased != 0){
                         pricePerCoin = amountExchanged/quantityPurchased;
-                        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
+                        tv_pricePerCoin.setText("$" + Double.toString(pricePerCoin));
                     }
                 }
             }
@@ -111,7 +114,7 @@ public class Transaction extends AppCompatActivity {
                     amountExchanged = Double.parseDouble(string_amountExchanged);
                     if (amountExchanged != 0 && quantityPurchased != 0){
                         pricePerCoin = amountExchanged/quantityPurchased;
-                        tv_pricePerCoin.setText(Double.toString(pricePerCoin));
+                        tv_pricePerCoin.setText("$" + Double.toString(pricePerCoin));
                     }
 
                 }
@@ -124,6 +127,15 @@ public class Transaction extends AppCompatActivity {
 
 
     public void saveTransaction(View v){
+
+        Switch toggle = findViewById(R.id.switch1);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    quantityPurchased *= -1;
+                }
+            }
+        });
 
         boolean coinFound = false;
         if (portfolioDataEntries.isEmpty()){

@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -115,6 +116,15 @@ public class Detail extends AppCompatActivity implements ListOfCrypto.Listener {
                 cryptoDetail.currentValue = cryptoDetail.totalQuantityOwned * cryptoDetail.current_price;
             }
         }
+
+        TextView amountOwned = findViewById(R.id.amount_owned);
+        amountOwned.setText("Amount Owned: " + cryptoDetail.totalQuantityOwned + cryptoDetail.symbol);
+
+        TextView currentValue = findViewById(R.id.owned_value);
+        currentValue.setText("Current Value: $" + cryptoDetail.currentValue);
+
+        TextView weightedAveragePrice = findViewById(R.id.weighted_average_price);
+        weightedAveragePrice.setText("Average Price: $" + cryptoDetail.weightedAveragePriceUSD);
 
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
