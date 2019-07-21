@@ -24,12 +24,21 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
     public String portfolioFilename = "myPortfolio.txt";
     private List<CryptoDataPoints> sortList = null;
     ListView gainList;
+    ListView lossList;
 
-    class SortByChange implements Comparator<CryptoDataPoints>
+    class SortByGain implements Comparator<CryptoDataPoints>
     {
         public int compare(CryptoDataPoints a, CryptoDataPoints b)
         {
             return (int)(a.percentGainLoss - b.percentGainLoss);
+        }
+    }
+
+    class SortByLoss implements Comparator<CryptoDataPoints>
+    {
+        public int compare(CryptoDataPoints a, CryptoDataPoints b)
+        {
+            return (int)(b.percentGainLoss - a.percentGainLoss);
         }
     }
 
@@ -101,10 +110,22 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
             @Override
             public void run() {
                 sortList = new ArrayList<>(cryptoList.getListCDP());
-                Collections.sort(sortList, new SortByChange());
-                //ArrayAdapter gainAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sortList);
-                //gainList.setAdapter(gainAdapter);
-
+                Collections.sort(sortList, new SortByGain());
+                List<CryptoDataPoints> temp = new ArrayList<>();
+                for (int i = 0; i < 3; i++)
+                {
+                    temp.add(sortList.get(i));
+                }
+                ArrayAdapter gainAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, temp);
+                gainList.setAdapter(gainAdapter);
+                Collections.sort(sortList, new SortByLoss());
+                temp.clear();
+                for (int i = 0; i < 3; i++)
+                {
+                    temp.add(sortList.get(i));
+                }
+                ArrayAdapter lossAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, temp);
+                lossList.setAdapter(lossAdapter);
             }
         });
     }
