@@ -89,10 +89,11 @@ public class Transaction extends AppCompatActivity {
 
         tv_pricePerCoin = findViewById(R.id.price_per_coin);
         et_quantityPurchased = findViewById(R.id.quantity_purchased);
+        et_amountExchanged = findViewById(R.id.amount_exchanged);
         et_quantityPurchased.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && et_quantityPurchased.getText().toString() != ""){
+                if (!hasFocus && et_quantityPurchased.getText().toString() != "" && et_amountExchanged.getText().toString() != ""){
                     String string_quantityPurchased = et_quantityPurchased.getText().toString();
                     quantityPurchased = Double.parseDouble(string_quantityPurchased);
                     if (amountExchanged != 0 && quantityPurchased != 0){
@@ -102,11 +103,10 @@ public class Transaction extends AppCompatActivity {
                 }
             }
         });
-        et_amountExchanged = findViewById(R.id.amount_exchanged);
         et_amountExchanged.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && et_amountExchanged.getText().toString() != ""){
+                if (!hasFocus && et_amountExchanged.getText().toString() != "" && et_quantityPurchased.getText().toString() != ""){
                     String string_amountExchanged = et_amountExchanged.getText().toString();
                     amountExchanged = Double.parseDouble(string_amountExchanged);
                     if (amountExchanged != 0 && quantityPurchased != 0){

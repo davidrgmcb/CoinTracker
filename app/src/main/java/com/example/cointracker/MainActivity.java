@@ -6,18 +6,31 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ListOfCrypto.Listener{
     private ListOfCrypto cryptoList = null;
     public String portfolioFilename = "myPortfolio.txt";
-    public String getPortfolioFilename(){
-        return portfolioFilename;
+    private List<CryptoDataPoints> sortList = null;
+    ListView gainList;
+
+    class SortByChange implements Comparator<CryptoDataPoints>
+    {
+        public int compare(CryptoDataPoints a, CryptoDataPoints b)
+        {
+            return (int)(a.percentGainLoss - b.percentGainLoss);
+        }
     }
 
     @Override
@@ -29,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
-
-
 
         //check if portfolio file exists, if not, create it
         File file = new File(getFilesDir()+"/"+portfolioFilename);
@@ -83,14 +94,17 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         //Intent myIntent = new Intent(MainActivity.this, Detail.class);
         //MainActivity.this.startActivity(myIntent);
     }
-    static int count = 0;
+
     @Override
     public void updateUI() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ++count;
-                Log.d("updateUI", "" + count);
+                sortList = new ArrayList<>(cryptoList.getListCDP());
+                Collections.sort(sortList, new SortByChange());
+                //ArrayAdapter gainAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sortList);
+                //gainList.setAdapter(gainAdapter);
+
             }
         });
     }
