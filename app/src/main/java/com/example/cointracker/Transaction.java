@@ -129,13 +129,15 @@ public class Transaction extends AppCompatActivity {
     public void saveTransaction(View v){
 
         Switch toggle = findViewById(R.id.switch1);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if(toggle.isChecked())
+            quantityPurchased *= -1;
+                /*setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     quantityPurchased *= -1;
                 }
             }
-        });
+        });*/
 
         boolean coinFound = false;
         if (portfolioDataEntries.isEmpty()){
