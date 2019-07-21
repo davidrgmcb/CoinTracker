@@ -8,4 +8,6 @@
     <string name="title_activity_crypto_detail">Crypto Detail</string>
     <string name="default_currency">USD</string>
     <string name="title_activity_transaction">Transaction</string>
+    <string name="text_view_gain">Top Three Gainers</string>
+    <string name="text_view_loss">Top Three Losers</string>
 </resources>

@@ -41,7 +41,7 @@ public class CryptoDataPoints {
 
 
     public String toString() {
-        return name + " " + price_change_percentage_24h + "%/n $" + current_price;
+        return name + " " + price_change_percentage_24h + "%\n$" + current_price;
     }
 
 //
