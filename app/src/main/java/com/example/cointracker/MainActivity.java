@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
     {
         public int compare(CryptoDataPoints a, CryptoDataPoints b)
         {
-            return (int)(a.percentGainLoss - b.percentGainLoss);
+            return (int)(a.price_change_percentage_24h - b.price_change_percentage_24h);
         }
     }
 
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
     {
         public int compare(CryptoDataPoints a, CryptoDataPoints b)
         {
-            return (int)(b.percentGainLoss - a.percentGainLoss);
+            return (int)(b.price_change_percentage_24h - a.price_change_percentage_24h);
         }
     }
 
