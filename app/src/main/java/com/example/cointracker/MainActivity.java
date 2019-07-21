@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements ListOfCrypto.List
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setSelectedItemId(R.id.navigation_home);
+        gainList = findViewById(R.id.gainList);
+        lossList = findViewById(R.id.lossList);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         cryptoList = ListOfCrypto.getInstance();
         cryptoList.registerListener(this);
